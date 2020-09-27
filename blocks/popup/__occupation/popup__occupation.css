@@ -1,0 +1,18 @@
+.popup__occupation {
+  font-size: 14px;
+  line-height: 17px;
+  border: none;  
+  outline: none;
+  margin-top: 40.08px;
+  border-bottom: 1px solid #000000;
+  opacity: 0.2;
+  box-sizing: border-box;
+  padding: 0;
+ 
+}
+
+@media screen and (max-width: 619px) {
+  .popup__occupation {
+    margin: 0 0 45px;
+  }
+}

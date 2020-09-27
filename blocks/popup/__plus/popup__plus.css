@@ -1,0 +1,29 @@
+.popup__plus {
+  background-image: url('../../../images/close_icon.png');
+  background-repeat: no-repeat;
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  top: -44px;
+  right: -44px;
+  
+
+}
+
+.popup__plus:hover {
+  transition: opacity 0.3s;
+  opacity: 60%;
+  cursor: url('../../../images/cursor.png'), auto;
+}
+
+@media screen and (max-width: 619px) {
+  .popup__plus {
+    width: 38px;
+    height: 38px;
+    top: -48.62px;
+    right: 0;
+    background-size: cover;
+  }   
+  
+}
+

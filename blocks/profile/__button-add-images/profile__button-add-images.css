@@ -1,0 +1,36 @@
+.profile__button-add-images {
+  width: 150px;
+  height: 50px;
+  background-color: #000000;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 2px;
+  align-self: center;
+  margin-left: calc(100% - 636px); 
+  padding: 0;
+
+}
+
+.profile__button-add-images:hover {
+  border-radius: 1px;
+  transition: opacity 0.3s;
+  opacity: 60%;
+  cursor: url('../../../images/cursor.png'), auto;
+}
+
+@media screen and (max-width: 920px) {
+  .profile__button-add-images {
+    margin-left: calc(100% - 489px); 
+  }
+}
+
+
+@media screen and (max-width: 619px) {
+  .profile__button-add-images {
+    width: 282px;
+    margin: 0 19px;
+   
+  }
+} 
+

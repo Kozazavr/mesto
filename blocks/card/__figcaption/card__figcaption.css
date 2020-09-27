@@ -1,0 +1,14 @@
+.card__figcaption {
+  position: relative;
+  max-width: 246px;
+  margin-left: 21px;
+  margin-top: 22px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+
+

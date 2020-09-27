@@ -1,0 +1,9 @@
+.card__like {
+  background-image: url('../../../images/heart.svg');
+  width: 20.76px;
+  height: 18.13px;
+  padding-right: 6px;
+  background-repeat: no-repeat;
+  
+}
+

@@ -1,0 +1,22 @@
+.profile__occupation {
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  font-style: normal;
+  grid-column-start: 1;
+  grid-column-end: span 2;
+  
+}
+
+@media screen and (max-width: 920px) {
+  .profile__occupation {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+@media screen and (max-width: 619px) {
+  .profile__occupation {
+    text-align: center;
+  }
+}
