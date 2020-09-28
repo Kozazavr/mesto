@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>MestoRussia</title>
     <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body class="page">
@@ -13,7 +13,7 @@
         <div class="header__line"></div>
       </header>
       <main class="page__content">
-       <section class="profile page__profile">
+        <section class="profile page__profile">
           <img 
             src="images/avatar.jpg" 
             alt="Жак-Ив Кусто"
@@ -30,96 +30,102 @@
             </button>
             <p class="profile__occupation">Исследователь океана</p>
           </div>
-          <button form="" class="profile__button-add-images">
+          <button class="profile__button-add-images">
             <img
               src="images/plus.png"
               alt="Кнопка добавления фото"
               class="profile__button-image-plus"
             />
           </button>
-       </section>
-       <section class="popup">
-        <form class="popup__container">
-          <div class="popup__plus"></div>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__name">
-          <input type="text" class="popup__occupation">
-          <button class="popup__button">Сохранить</button>
-        </form>
-      </section>
-       <section class="cards page__cards">
-
-        <figure class="card">
-          <img
-            src="images/prokopyevsk.jpg"
-            alt="Прокопьевск, Кемеровская область"
-            class="card__image"
-          />
-          <figcaption class="card__figcaption">
-            <h2 class="card__title">Прокопьевск</h2>
-            <div class="card__like"></div>
-          </figcaption>
-        </figure>
-        <figure class="card">
-          <img
-            src="images/elton_lake.jpg"
-            alt="озеро Эльтон, Волгоградская область"
-            class="card__image"
-          />
-          <figcaption class="card__figcaption">
-            <h2 class="card__title">озеро Эльтон</h2>
-            <div class="card__like"></div>
-          </figcaption>
-        </figure>
-        <figure class="card">
-          <img
-            src="images/kamchatka.jpg"
-            alt="Корякский вулкан, Камчатка"
-            class="card__image"
-          />
-          <figcaption class="card__figcaption">
-            <h2 class="card__title">Корякский вулкан</h2>
-            <div class="card__like"></div>
-          </figcaption>
-        </figure>
-        <figure class="card">
-          <img
-            src="images/moscow.jpg"
-            alt="г.Москва, столица России"
-            class="card__image"
-          />
-          <figcaption class="card__figcaption">
-            <h2 class="card__title">Москва</h2>
-            <div class="card__like"></div>
-          </figcaption>
-        </figure>
-        <figure class="card">
-          <img
-            src="images/olkhon_island_baikal_lake.jpg"
-            alt="остров Ольхон на озере Байкал"
-            class="card__image"
-          />
-          <figcaption class="card__figcaption">
-            <h2 class="card__title">остров Ольхон, Байкал</h2>
-            <div class="card__like"></div>
-          </figcaption>
-        </figure>
-        <figure class="card">
-          <img
-            src="images/sochi.jpg"
-            alt="Сочи"
-            class="card__image"
-          />
-          <figcaption class="card__figcaption">
-            <h2 class="card__title">Сочи</h2>
-            <div class="card__like"></div>
-          </figcaption>
-        </figure>
-       </section>
+        </section>
+        <section class="popup">
+          <form class="popup__container">
+            <div class="popup__plus"></div>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" class="popup__name" maxlength="30">
+            <div class="popup__line"></div>
+            <input type="text" class="popup__occupation" maxlength="50">
+            <div class="popup__line"></div>
+            <button type="submit" class="popup__button">Сохранить</button>
+          </form>
+        </section>
+        <section class="cards page__cards">
+        
+          <figure class="card">
+            <img
+              src="images/prokopyevsk.jpg"
+              alt="Прокопьевск, Кемеровская область"
+              class="card__image"
+            />
+            <figcaption class="card__figcaption">
+              <h2 class="card__title">Прокопьевск</h2>
+              <div class="card__like"></div>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <img
+              src="images/elton_lake.jpg"
+              alt="озеро Эльтон, Волгоградская область"
+              class="card__image"
+            />
+            <figcaption class="card__figcaption">
+              <h2 class="card__title">озеро Эльтон</h2>
+              <div class="card__like"></div>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <img
+              src="images/kamchatka.jpg"
+              alt="Корякский вулкан, Камчатка"
+              class="card__image"
+            />
+            <figcaption class="card__figcaption">
+              <h2 class="card__title">Корякский вулкан</h2>
+              <div class="card__like"></div>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <img
+              src="images/moscow.jpg"
+              alt="г.Москва, столица России"
+              class="card__image"
+            />
+            <figcaption class="card__figcaption">
+              <h2 class="card__title">Москва</h2>
+              <div class="card__like"></div>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <img
+              src="images/olkhon_island_baikal_lake.jpg"
+              alt="остров Ольхон на озере Байкал"
+              class="card__image"
+            />
+            <figcaption class="card__figcaption">
+              <h2 class="card__title">остров Ольхон, Байкал</h2>
+              <div class="card__like"></div>
+            </figcaption>
+          </figure>
+          <figure class="card">
+            <img
+              src="images/sochi.jpg"
+              alt="Сочи"
+              class="card__image"
+            />
+            <figcaption class="card__figcaption">
+              <h2 class="card__title">Сочи</h2>
+              <div class="card__like"></div>
+            </figcaption>
+          </figure>
+        </section>
       </main>
       <footer class="footer page__footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
       </footer>
     </div>
+    <script src="scripts/index.js"></script>
   </body>
 </html>
+
+
+

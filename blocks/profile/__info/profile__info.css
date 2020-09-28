@@ -1,6 +1,6 @@
 .profile__info {
   display: inline-grid;
-  grid-template-columns: 1fr 24px;
+  grid-template-columns: max-content 24px;
   column-gap: 17px;
   grid-template-rows: minmax(34px 43px);
   margin: 18px 0 25px 0;
@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 767px) {
   .profile__info {
-    grid-template-columns: 1fr 18px;
+    grid-template-columns: max-content 18px;
   }
 }
 

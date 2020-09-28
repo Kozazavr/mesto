@@ -5,8 +5,8 @@
   display: flex;
   flex-direction: column;
   color: #000000;
-  width: 430px;
-  height: 330px;
+  max-width: ;width: 430px;
+  max-height: 330px;
   background-color: #ffffff;
   font-family: inherit;
   outline: none;
@@ -22,8 +22,8 @@
 
 @media screen and (max-width: 619px) {
   .popup__container {
-    width: 282px;
-    height: 322px;
+    max-width: 282px;
+    max-height: 322px;
     padding: 25px 22px;
  
   }

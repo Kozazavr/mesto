@@ -6,19 +6,25 @@
   min-width: 295px;
   margin: 0;
   padding: 0;
-    
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+        
 }
 
 @media screen and (max-width: 920px) {
   .profile__name {
     font-size: 27px;
     line-height: 207%;
-    min-width: 190px;
+    max-width: 190px;
   }
+}
 
 @media screen and (max-width: 619px) {
   .profile__name {
     text-align: center;
+    min-width: 201px;
   }
 }
 

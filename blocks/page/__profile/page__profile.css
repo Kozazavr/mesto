@@ -1,5 +1,7 @@
 .page__profile {
   margin: 40px 0 51px;
+  display: flex;
+  justify-content: space-between;
 }
 
 
