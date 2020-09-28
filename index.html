@@ -14,21 +14,23 @@
       </header>
       <main class="page__content">
         <section class="profile page__profile">
-          <img 
-            src="images/avatar.jpg" 
-            alt="Жак-Ив Кусто"
-            class="profile__avatar"
-          />
-          <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button form="" class="profile__button">
-              <img
-                src="images/profile.png"
-                alt="Кнопка редактирования профиля"
-                class="profile__button-image"
-              />
-            </button>
-            <p class="profile__occupation">Исследователь океана</p>
+          <div class="profile__container">
+            <img 
+              src="images/avatar.jpg" 
+              alt="Жак-Ив Кусто"
+              class="profile__avatar"
+            />
+            <div class="profile__info">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button form="" class="profile__button">
+                <img
+                  src="images/profile.png"
+                  alt="Кнопка редактирования профиля"
+                  class="profile__button-image"
+                />
+              </button>
+              <p class="profile__occupation">Исследователь океана</p>
+            </div>
           </div>
           <button class="profile__button-add-images">
             <img
@@ -44,7 +46,7 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <input type="text" class="popup__name" maxlength="30">
             <div class="popup__line"></div>
-            <input type="text" class="popup__occupation" maxlength="50">
+            <input type="text" class="popup__occupation" maxlength="40">
             <div class="popup__line"></div>
             <button type="submit" class="popup__button">Сохранить</button>
           </form>

@@ -1,5 +1,5 @@
 .profile__info {
-  display: inline-grid;
+  display: grid;
   grid-template-columns: max-content 24px;
   column-gap: 17px;
   grid-template-rows: minmax(34px 43px);
@@ -8,9 +8,18 @@
 
 @media screen and (max-width: 767px) {
   .profile__info {
-    grid-template-columns: max-content 18px;
+    grid-template-columns: 1fr 18px;
   }
 }
 
+@media screen and (max-width: 619px) {
+  .profile__info {
+    margin: 18px 0 36px 0;
+  }
+}
 
-
+@media screen and (max-width: 320px) {
+  .profile__info {
+    column-gap: 0;
+  }
+}

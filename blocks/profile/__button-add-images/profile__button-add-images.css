@@ -7,7 +7,6 @@
   position: relative;
   border-radius: 2px;
   align-self: center;
-  margin-left: calc(100% - 636px); 
   padding: 0;
 
 }
@@ -21,7 +20,7 @@
 
 @media screen and (max-width: 920px) {
   .profile__button-add-images {
-    margin-left: calc(100% - 489px); 
+    width: 100px;  
   }
 }
 

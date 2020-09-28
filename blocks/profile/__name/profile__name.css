@@ -4,6 +4,7 @@
   font-size: 42px;
   line-height: 133%;
   min-width: 295px;
+  max-width: 350px;
   margin: 0;
   padding: 0;
 
@@ -17,19 +18,15 @@
   .profile__name {
     font-size: 27px;
     line-height: 207%;
-    max-width: 190px;
+    min-width: 190px;
+    max-width: 240px;
   }
 }
 
 @media screen and (max-width: 619px) {
   .profile__name {
     text-align: center;
-    min-width: 201px;
+    min-width: 201px; 
   }
 }
 
-@media screen and (max-width: 320px) {
-  .profile__name {
-    min-width: 201px;
-  }
-}
