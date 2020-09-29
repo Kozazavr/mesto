@@ -1,12 +1,11 @@
 .popup__plus {
   background-image: url('../../../images/close_icon.png');
   background-repeat: no-repeat;
-  position: fixed;
+  position: absolute;
   width: 56px;
   height: 56px;
   top: -44px;
   right: -44px;
-  
 
 }
 
