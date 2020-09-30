@@ -37,7 +37,7 @@
             />
             <figcaption class="card__figcaption">
               <h2 class="card__title">Прокопьевск</h2>
-              <div class="card__like"></div>
+              <button class="card__like" type="button"></button>
             </figcaption>
           </figure>
           <figure class="card">
@@ -48,7 +48,7 @@
             />
             <figcaption class="card__figcaption">
               <h2 class="card__title">озеро Эльтон</h2>
-              <div class="card__like"></div>
+              <button class="card__like" type="button"></button>
             </figcaption>
           </figure>
           <figure class="card">
@@ -59,7 +59,7 @@
             />
             <figcaption class="card__figcaption">
               <h2 class="card__title">Корякский вулкан</h2>
-              <div class="card__like"></div>
+              <button class="card__like" type="button"></button>
             </figcaption>
           </figure>
           <figure class="card">
@@ -70,7 +70,7 @@
             />
             <figcaption class="card__figcaption">
               <h2 class="card__title">Москва</h2>
-              <div class="card__like"></div>
+              <button class="card__like" type="button"></button>
             </figcaption>
           </figure>
           <figure class="card">
@@ -81,7 +81,7 @@
             />
             <figcaption class="card__figcaption">
               <h2 class="card__title">остров Ольхон, Байкал</h2>
-              <div class="card__like"></div>
+              <button class="card__like" type="button"></button>
             </figcaption>
           </figure>
           <figure class="card">
@@ -92,7 +92,7 @@
             />
             <figcaption class="card__figcaption">
               <h2 class="card__title">Сочи</h2>
-              <div class="card__like"></div>
+              <button class="card__like" type="button"></button>
             </figcaption>
           </figure>
         </section>
@@ -100,10 +100,8 @@
           <form class="popup__container" action="" name="profileForm">
             <button type="button" class="popup__plus"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" class="popup__name" maxlength="30">
-            <div class="popup__line"></div>
-            <input type="text" class="popup__occupation" maxlength="40">
-            <div class="popup__line"></div>
+            <input type="text" class="popup__input popup__input_type_name" maxlength="30" name="popup_name">
+            <input type="text" class="popup__input popup__input_type_job" maxlength="40" name="popup_job">
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
         </section>
