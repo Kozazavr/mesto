@@ -10,7 +10,6 @@
     <div class="page__container">
       <header class="header">
         <div class="header__logo"></div>
-        <div class="header__line"></div>
       </header>
       <main class="page__content">
         <section class="profile page__profile">
@@ -22,34 +21,11 @@
             />
             <div class="profile__info">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__button">
-                <img
-                  src="images/profile.png"
-                  alt="Кнопка редактирования профиля"
-                  class="profile__button-image"
-                />
-              </button>
+              <button class="profile__button" type="button"></button>
               <p class="profile__occupation">Исследователь океана</p>
             </div>
           </div>
-          <button class="profile__button-add-images">
-            <img
-              src="images/plus.png"
-              alt="Кнопка добавления фото"
-              class="profile__button-image-plus"
-            />
-          </button>
-        </section>
-        <section class="popup">
-          <form class="popup__container">
-            <div class="popup__plus"></div>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" class="popup__name" maxlength="30">
-            <div class="popup__line"></div>
-            <input type="text" class="popup__occupation" maxlength="40">
-            <div class="popup__line"></div>
-            <button type="submit" class="popup__button">Сохранить</button>
-          </form>
+          <button class="profile__button-add-images" type="button"></button>
         </section>
         <section class="cards page__cards">
         
@@ -119,6 +95,17 @@
               <div class="card__like"></div>
             </figcaption>
           </figure>
+        </section>
+        <section class="popup">
+          <form class="popup__container" action="" name="profileForm">
+            <button type="button" class="popup__plus"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" class="popup__name" maxlength="30">
+            <div class="popup__line"></div>
+            <input type="text" class="popup__occupation" maxlength="40">
+            <div class="popup__line"></div>
+            <button type="submit" class="popup__button">Сохранить</button>
+          </form>
         </section>
       </main>
       <footer class="footer page__footer">

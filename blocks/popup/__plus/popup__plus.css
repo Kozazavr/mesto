@@ -1,11 +1,17 @@
 .popup__plus {
   background-image: url('../../../images/close_icon.png');
   background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000000;
   position: absolute;
   width: 56px;
   height: 56px;
   top: -44px;
   right: -44px;
+  padding: 0;
+  border: none;
+  z-index: -1;
+  
 
 }
 
@@ -25,4 +31,3 @@
   }   
   
 }
-
