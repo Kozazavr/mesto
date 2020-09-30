@@ -1,16 +1,16 @@
 let popup = document.querySelector('.popup');
-let popupName = document.querySelector('.popup__name');
-let popupOccupation = document.querySelector('.popup__occupation');
+let inputName = document.querySelector('.popup__input_type_name');
+let inputJob = document.querySelector('.popup__input_type_job');
 let profileButton = document.querySelector('.profile__button');
 let profileName = document.querySelector('.profile__name');
-let profileOccupation = document.querySelector('.profile__occupation');
+let profileJob = document.querySelector('.profile__job');
 let popupPlus = document.querySelector('.popup__plus');
 
 function eventPopup () {
   if (popup.classList.contains('popup_opened') === false) {
         popup.classList.add('popup_opened');
-        popupName.value = profileName.textContent;
-        popupOccupation.value = profileOccupation.textContent;
+        inputName.value = profileName.textContent;
+        inputJob.value = profileJob.textContent;
 
   } else {
     popup.classList.remove('popup_opened');
@@ -19,10 +19,10 @@ function eventPopup () {
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  let valueName = popupName.value;
+  let valueName = inputName.value;
   profileName.textContent = valueName;
-  let valueOccupation = popupOccupation.value;
-  profileOccupation.textContent = valueOccupation;
+  let valueOccupation = inputJob.value;
+  profileJob.textContent = valueOccupation;
   eventPopup();
   
  }
