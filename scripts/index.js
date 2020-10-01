@@ -19,10 +19,8 @@ function eventPopup () {
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  let valueName = inputName.value;
-  profileName.textContent = valueName;
-  let valueOccupation = inputJob.value;
-  profileJob.textContent = valueOccupation;
+  profileName.textContent = inputName.value;
+  profileJob.textContent = inputJob.value;
   eventPopup();
   
  }

@@ -14,7 +14,7 @@
 .popup__button:hover {
   transition: opacity 0.3s;
   opacity: 80%;
-  cursor: url('../../../images/cursor.png'), auto;
+  cursor: url('../../../images/cursor.svg'), auto;
 }
 
 @media screen and (max-width: 619px) {

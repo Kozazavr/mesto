@@ -1,7 +1,7 @@
 .profile__button-add-images {
   min-width: ;width: 150px;
   min-height: 50px;
-  background-image: url('../../../images/plus.png');
+  background-image: url('../../../images/plus.svg');
   background-color: #000000;
   background-repeat: no-repeat;
   background-position: center;
@@ -17,7 +17,7 @@
   border-radius: 1px;
   transition: opacity 0.3s;
   opacity: 60%;
-  cursor: url('../../../images/cursor.png'), auto;
+  cursor: url('../../../images/cursor.svg'), auto;
 }
 
 @media screen and (max-width: 920px) {

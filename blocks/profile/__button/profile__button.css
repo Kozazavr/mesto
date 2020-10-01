@@ -1,5 +1,5 @@
 .profile__button {
-  background-image: url('../../../images/profile.png');
+  background-image: url('../../../images/profile.svg');
   background-color: #000000;
   background-repeat: no-repeat;
   background-position: center;
@@ -14,7 +14,7 @@
 .profile__button:hover {
   transition: opacity 0.3s;
   opacity: 60%;
-  cursor: url('../../../images/cursor.png'), auto;
+  cursor: url('../../../images/cursor.svg'), auto;
 }
 
 @media screen and (max-width: 920px) {

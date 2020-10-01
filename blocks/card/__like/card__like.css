@@ -13,5 +13,5 @@
 .card__like:hover {
   transition: opacity 0.3s;
   opacity: 60%;
-  cursor: url('../../../images/cursor.png'), auto;
+  cursor: url('../../../images/cursor.svg'), auto;
 }

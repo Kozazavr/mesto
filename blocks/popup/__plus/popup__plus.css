@@ -4,25 +4,26 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -44px;
-  right: -44px;
+  top: -47px;
+  right: -47px;
   padding: 0;
   border: none;
   z-index: -1;
   outline: none;
-
+  min-width: 57.56px;
+  min-height: 57.56px;
 }
 
 .popup__plus:hover {
   transition: opacity 0.3s;
   opacity: 60%;
-  cursor: url('../../../images/cursor.png'), auto;
+  cursor: url('../../../images/cursor.svg'), auto;
 }
 
 @media screen and (max-width: 619px) {
   .popup__plus {
-    max-width: 38px;
-    top: -48.62px;
+    min-width: 38px;
+    top: -62.62px;
     right: 0;
     background-size: cover;
   }   
