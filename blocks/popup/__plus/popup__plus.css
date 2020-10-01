@@ -1,17 +1,17 @@
 .popup__plus {
   background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-image: url('../../../images/popup_close_icon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
   position: absolute;
   top: -45.55px;
   right: -45.55px;
   padding: 0;
   border: none;
-  z-index: -1;
   outline: none;
   min-width: 57.56px;
-  min-height: 57.56px;
+  padding-top: 57.56px;
+  
 }
 
 .popup__plus:hover {
@@ -22,10 +22,10 @@
 
 @media screen and (max-width: 619px) {
   .popup__plus {
-    min-width: 35px;
-    min-height: 35px;
-    top: -48px;
-    right: 0;
+    min-width: 22px;
+    padding-top: 22px;
+    top: -43px;
+    right: 7px;
     background-size: cover;
   }   
 }

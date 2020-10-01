@@ -16,14 +16,12 @@ function closePopup () {
     popup.classList.remove('popup_opened');
 }  
 
-
 function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup();
-  
- }
+}
 
 profileButton.addEventListener('click', openPopup);
 popupPlus.addEventListener('click', closePopup);

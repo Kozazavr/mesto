@@ -1,7 +1,7 @@
 .profile__button-add-images {
-  min-width: ;width: 150px;
+  min-width: 150px;
   min-height: 50px;
-  background-image: url('../../../images/plus.svg');
+  background-image: url('../../../images/profile_plus.svg');
   background-color: #000000;
   background-repeat: no-repeat;
   background-position: center;
@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 920px) {
   .profile__button-add-images {
-    width: 100px;  
+    min-width: 100px;  
     background-size: 16px;
   }
 }
@@ -30,7 +30,7 @@
 
 @media screen and (max-width: 619px) {
   .profile__button-add-images {
-    width: 282px;
+    min-width: 282px;
     margin: 0 19px;
    
   }

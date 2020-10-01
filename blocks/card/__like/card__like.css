@@ -1,11 +1,11 @@
 .card__like {
-  background-image: url('../../../images/heart.svg');
+  background-image: url('../../../images/card_like.svg');
   min-width: 20.76px;
   min-height: 18.13px;
   padding: 0;
   background-repeat: no-repeat;
   border: none;
-  background-color: #ffffff;
+  background-color: transparent;
   outline: none;
  
 }
