@@ -29,16 +29,6 @@ profileButton.addEventListener('click', openPopup);
 popupPlus.addEventListener('click', closePopup);
 popup.addEventListener('submit', formSubmitHandler);
 
-// function eventPopup () {
-//   if (popup.classList.contains('popup_opened') === false) {
-//         popup.classList.add('popup_opened');
-//         inputName.value = profileName.textContent;
-//         inputJob.value = profileJob.textContent;
-
-//   } else {
-//     popup.classList.remove('popup_opened');
-//   }  
-// }
 
 
 
