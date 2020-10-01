@@ -1,11 +1,10 @@
 .card__figcaption {
-  max-width: 246px;
-  margin-left: 21px;
-  margin-top: 22px;
-  margin-bottom: 28px;
+  min-width: 246px;
+  padding: 25px 21px 31px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 
 }
 

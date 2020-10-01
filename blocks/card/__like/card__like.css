@@ -1,13 +1,13 @@
 .card__like {
   background-image: url('../../../images/heart.svg');
-  width: 20.76px;
-  height: 18.13px;
-  padding-right: 6px;
+  min-width: 20.76px;
+  min-height: 18.13px;
+  padding: 0;
   background-repeat: no-repeat;
   border: none;
   background-color: #ffffff;
   outline: none;
-  
+ 
 }
 
 .card__like:hover {
