@@ -11,4 +11,3 @@
 
 Адрес проекта: https://kozazavr.github.io/mesto/
 
-(test)
