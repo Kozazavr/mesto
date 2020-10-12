@@ -48,27 +48,25 @@ function likeCardHeard (evt) {
   }
 }
 
+function deleteCard (evt) {
+  const targetEvent = evt.target;
+  const parentTarget = targetEvent.parentElement;
+  parentTarget.remove();
+}
+
 initialCards.forEach((item) => {
   const cardTemplate = document.querySelector('#card').content;
   const cardElement = cardTemplate.cloneNode(true);
   const likeListener = cardElement.querySelector('.card__like');  
+  const cardDeleteListener = cardElement.querySelector('.card__recycle-bin');  
 
   cardElement.querySelector('.card__image').src = item.link;
   cardElement.querySelector('.card__title').textContent = item.name;
   likeListener.addEventListener('click', likeCardHeard);   
+  cardDeleteListener.addEventListener('click', deleteCard);
   cardContainer.append(cardElement);
   
 });
-
-function likeCardHeard (evt) {
-  const targetEvent = evt.target;
-  if(!targetEvent.classList.contains('card__like_target')) {
-    targetEvent.classList.add('card__like_target');
-  } else {
-    targetEvent.classList.remove('card__like_target');
-  }
-}
-
 
 function openPopupProfile () {
   popupProfile.classList.add('popup_opened');
@@ -102,10 +100,12 @@ function formSubmitImages (evt) {
    const cardTemplate = document.querySelector('#card').content;
    const cardElement = cardTemplate.cloneNode(true);
    const likeListener = cardElement.querySelector('.card__like');
+   const cardDeleteListener = cardElement.querySelector('.card__recycle-bin');  
   
    likeListener.addEventListener('click', likeCardHeard); 
    cardElement.querySelector('.card__title').textContent = nameImage.value;
    cardElement.querySelector('.card__image').src = linkImage.value;
+   cardDeleteListener.addEventListener('click', deleteCard);
    cardContainer.prepend(cardElement);
    closePopupAddImages ();
 } 
