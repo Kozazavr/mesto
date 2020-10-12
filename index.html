@@ -32,17 +32,32 @@
           <button class="profile__button-add-images" type="button"></button>
         </section>
         <section class="cards page__cards"></section> 
-        <section class="popup">
+
+
+        <section class="popup popup_profile">
           <form class="popup__container" name="profileForm">
-            <button type="button" class="popup__plus"></button>
+            <button type="button" class="popup__close popup__close_profile"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <input type="text" class="popup__input popup__input_type_name" 
               maxlength="30" name="popup_name" autocomplete="off">
             <input type="text" class="popup__input popup__input_type_job" 
               maxlength="40" name="popup_job" autocomplete="off">
-            <button type="submit" class="popup__button">Сохранить</button>
+            <button type="submit" class="popup__button popup__button_save">Сохранить</button>
           </form>
         </section>
+
+        <section class="popup popup_add-images">
+          <form class="popup__container" name="addImageForm">
+            <button type="button" class="popup__close popup__close_add-images"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <input type="text" class="popup__input popup__input_type_image-name" 
+              maxlength="30" name="popup_name" autocomplete="off" placeholder="Название">
+            <input type="text" class="popup__input popup__input_type_image-link" 
+              name="popup_job" autocomplete="off" placeholder="Ссылка на картинку">
+            <button type="submit" class="popup__button popup__button_create">Создать</button>
+          </form>
+        </section>
+
       </main>
       <footer class="footer page__footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
@@ -51,6 +66,7 @@
     <template id="card">
       <figure class="card">
         <img class="card__image" alt="Фото" src="#">
+        <button class="card__recycle-bin" type="button"></button>
         <figcaption class="card__figcaption">
           <h2 class="card__title"></h2>
           <button class="card__like" type="button"></button>

@@ -1,4 +1,4 @@
-.popup__plus {
+.popup__close {
   background: transparent;
   background-image: url('../../../images/popup_close_icon.svg');
   background-repeat: no-repeat;
@@ -14,14 +14,14 @@
   
 }
 
-.popup__plus:hover {
+.popup__close:hover {
   transition: opacity 0.3s;
   opacity: 60%;
   cursor: url('../../../images/cursor.svg'), auto;
 }
 
 @media screen and (max-width: 619px) {
-  .popup__plus {
+  .popup__close {
     min-width: 22px;
     padding-top: 22px;
     top: -43px;
