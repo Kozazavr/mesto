@@ -35,6 +35,7 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const popupCloseProfile = document.querySelector('.popup__close_profile');
 const popupCloseAddImages = document.querySelector('.popup__close_add-images');
+const popupCloseViewImage= document.querySelector('.popup__close_view-image');
 const cardContainer = document.querySelector('.cards');
 const nameImage = document.querySelector('.popup__input_type_image-name');
 const linkImage = document.querySelector('.popup__input_type_image-link');
@@ -61,6 +62,10 @@ function deleteCard (evt) {
 
 function openPopupImage () {
    popupViewImages.classList.add('popup_opened');
+}
+
+function closeViewImage () {
+  popupViewImages.classList.remove('popup_opened');
 }
 
 function clickCardImage (evt) {
@@ -94,13 +99,13 @@ function openPopupProfile () {
   inputJob.value = profileJob.textContent;
 } 
 
-function openPopupAddImage () {
-  popupAddImages.classList.add('popup_opened');
-} 
-
 function closePopupProfile () {
   popupProfile.classList.remove('popup_opened');
 }  
+
+function openPopupAddImage () {
+  popupAddImages.classList.add('popup_opened');
+} 
 
 function closePopupAddImages () {
   popupAddImages.classList.remove('popup_opened');
@@ -140,5 +145,5 @@ popupCloseProfile.addEventListener('click', closePopupProfile);
 popupCloseAddImages.addEventListener('click', closePopupAddImages);
 popupProfile.addEventListener('submit', formSubmitHandler);
 popupAddImages.addEventListener('submit', formSubmitImages);
-
+popupCloseViewImage.addEventListener('click', closeViewImage);
 

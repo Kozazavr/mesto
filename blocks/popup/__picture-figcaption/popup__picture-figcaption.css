@@ -1,0 +1,7 @@
+.popup__picture-figcaption {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    bottom: -23px;
+}
+
