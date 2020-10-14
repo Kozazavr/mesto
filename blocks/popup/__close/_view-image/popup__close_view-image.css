@@ -4,3 +4,15 @@
      min-width: 56px;
      padding-top: 57.56px;
  }
+
+
+ @media screen and (max-width: 619px) {
+    .popup__close_view-image {
+      min-width: 22px;
+      padding-top: 22px;
+      top: -24px;
+      right: -24px;
+      background-size: cover;
+    }   
+  }
+  
