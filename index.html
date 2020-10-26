@@ -6,6 +6,7 @@
     <title>MestoRussia</title>
     <link rel="stylesheet" href="pages/index.css" />
     <script src="scripts/index.js" defer></script>
+    <script src="scripts/validate.js" defer></script>
   </head>
   <body class="page">
     <div class="page__container">
@@ -35,25 +36,37 @@
         <section class="cards page__cards"></section> 
 
         <section class="popup popup_profile">
-          <form class="popup__container" name="profileForm">
+          <form class="popup__container" name="profileForm" id="profileForm" novalidate>
             <button type="button" class="popup__close popup__close_profile"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" class="popup__input popup__input_type_name" 
-              maxlength="30" name="popup_name" autocomplete="off">
-            <input type="text" class="popup__input popup__input_type_job" 
-              maxlength="40" name="popup_job" autocomplete="off">
+            <div class="popup__field">
+              <input id="input-name" type="text" class="popup__input popup__input_type_name" minlength="2"
+                maxlength="40" name="popup_name" autocomplete="off" placeholder="Имя" required>
+              <span id="input-name-error" class="popup__input-error"></span>
+            </div>
+            <div class="popup__field">
+              <input id="input-job" type="text" class="popup__input popup__input_type_job" minlength="2"
+                maxlength="200" name="popup_job" autocomplete="off" placeholder="О себе" required>
+              <span id="input-job-error" class="popup__input-error"></span>
+            </div>
             <button type="submit" class="popup__button popup__button_save">Сохранить</button>
           </form>
         </section>
 
         <section class="popup popup_add-images">
-          <form class="popup__container" name="addImageForm">
+          <form class="popup__container" name="addImageForm" novalidate>
             <button type="button" class="popup__close popup__close_add-images"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input type="text" class="popup__input popup__input_type_image-name" 
-              maxlength="30" name="popup_name" autocomplete="off" placeholder="Название">
-            <input type="text" class="popup__input popup__input_type_image-link" 
-              name="popup_job" autocomplete="off" placeholder="Ссылка на картинку">
+            <div class="popup__field">
+              <input id="input-image-name" type="text" class="popup__input popup__input_type_image-name" minlength="2"
+                maxlength="30" name="popup_name" autocomplete="off" placeholder="Название" required>
+              <span id="input-image-name-error" class="popup__input-error"></span>
+            </div>
+            <div class="popup__field">
+              <input id="input-url" type="url" class="popup__input popup__input_type_image-link" 
+                name="popup_job" autocomplete="off" placeholder="Ссылка на картинку" required>
+              <span id="input-url-error" class="popup__input-error"></span>
+            </div>
             <button type="submit" class="popup__button popup__button_create">Создать</button>
           </form>
         </section>

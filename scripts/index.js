@@ -44,6 +44,9 @@ const popupViewImages = document.querySelector('.popup_view-images');
 const popupPicture = document.querySelector('.popup__picture');
 const popupPictureTitle = document.querySelector('.popup__picture-title');
 
+const buttonSave = popupProfile.querySelector('.popup__button_save'); 
+const buttonCreate = popupAddImages.querySelector('.popup__button_create');
+
 function likeCardHeard (evt) {
   const targetEvent = evt.target;
   targetEvent.classList.toggle('card__like_target');
@@ -68,6 +71,8 @@ function clickCardImage (evt) {
   reseveTitleCard.querySelector('.card__title');
   popupPictureTitle.textContent = reseveTitleCard.textContent;
   openPopup(popupViewImages);
+  closeEsc(popupViewImages);
+  closePopupOverlay(popupViewImages);
 }
 
 const renderCards = () => {
@@ -87,7 +92,7 @@ const getItems = (data) => {
   likeListener.addEventListener('click', likeCardHeard);   
   cardDeleteListener.addEventListener('click', deleteCard);
   cardImage.addEventListener('click', clickCardImage); 
-
+    
   return cardElement;
 }
 
@@ -108,17 +113,41 @@ function formSubmitImages (evt) {
   closePopup(popupAddImages);  
   nameImage.value = '';
   linkImage.value = '';
+  buttonCreate.classList.add('popup__button_inactive');
+  buttonCreate.setAttribute('disabled', 'secondAttribute');
 }
 
 profileButtonAddImages.addEventListener('click', function () {  
   openPopup(popupAddImages);
+  closeEsc(popupAddImages);
+  closePopupOverlay(popupAddImages);
 });  
 
 profileButton.addEventListener('click', function () {  
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
+  buttonSave.classList.remove('popup__button_inactive'); /// ИСПРАВИТЬ!!!
+  buttonSave.removeAttribute('disabled');                ///  ИСПРАВИТЬ!!!
   openPopup(popupProfile);
+  closeEsc(popupProfile);
+  closePopupOverlay(popupProfile);
 }); 
+
+const closeEsc = (popup) => {
+  document.addEventListener('keydown', function(evt) {
+    if(evt.key === 'Escape') {
+      closePopup(popup);
+    }
+  });
+}
+
+const closePopupOverlay = (popup) => {
+  document.addEventListener('click', function (evt) {
+    if(evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+  });
+}
 
 popupCloseProfile.addEventListener('click', function () {   
   closePopup(popupProfile);
@@ -137,5 +166,7 @@ popupCloseViewImage.addEventListener('click', function () {
 });  
 
 renderCards();
+
+
 
 
