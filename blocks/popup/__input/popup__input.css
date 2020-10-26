@@ -11,6 +11,10 @@
  
 }
 
+.popup__input::placeholder {
+  color: #c4c4c4;
+}
+
 @media screen and (max-width: 619px) {
   .popup__input {
     margin: 39px 0 0;
