@@ -48,13 +48,21 @@ const hasInvalidInput = (inputList) => {
   });
 }
 
+function inactiveButton(button) {
+  button.classList.add('popup__button_inactive');
+  button.setAttribute('disabled', 'secondAttribute');
+}
+
+function activeButton(button) {
+  button.classList.remove('popup__button_inactive');
+  button.removeAttribute('disabled');
+}
+
 const toggleButtonState = (inputList, buttonElement) => {
   if(hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__button_inactive');
-    buttonElement.setAttribute('disabled', 'secondAttribute');
+    inactiveButton(buttonElement);
   } else {
-    buttonElement.classList.remove('popup__button_inactive');
-    buttonElement.removeAttribute('disabled');
+    activeButton(buttonElement);
   }
 }
 
