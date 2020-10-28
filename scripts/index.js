@@ -52,7 +52,6 @@ function clearInputs (popup) {
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeEsc);
-  // searchInputError(popup, selectors);
   clearInputs(popupAddImages);
 }
 
