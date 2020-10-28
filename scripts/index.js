@@ -29,6 +29,13 @@ function deleteCard (evt) {
   evt.target.closest('.card').remove();
 }
 
+function findInputError (popup) {
+  const arrayList = Array.from(popup.querySelectorAll('.popup__input'));
+  arrayList.forEach((inputElement) => {
+    hideInputError(popup, inputElement, selectors);
+  });
+}
+
 function closeEsc (evt) {
   if(evt.key === 'Escape') {
     const currentPopup = document.querySelector('.popup_opened');
@@ -53,6 +60,7 @@ function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeEsc);
   clearInputs(popupAddImages);
+  findInputError(popup);
 }
 
 function clickCard(cardImage, cardTitle) {
