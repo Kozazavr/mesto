@@ -38,12 +38,22 @@ function closeEsc (evt) {
 
 function openPopup (popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeEsc);
+  document.addEventListener('keydown', closeEsc); 
+  inactiveButton(buttonCreate, selectors); 
+}
+
+function clearInputs (popup) {
+  if(popup.classList.contains('popup_add-images')) {
+    nameImage.value = '';
+    linkImage.value = '';
+  }
 }
  
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeEsc);
+  // searchInputError(popup, selectors);
+  clearInputs(popupAddImages);
 }
 
 function clickCard(cardImage, cardTitle) {
@@ -89,9 +99,6 @@ function formSubmitImages (evt) {
   });
   cardContainer.prepend(item);
   closePopup(popupAddImages);  
-  nameImage.value = '';
-  linkImage.value = '';
-  inactiveButton(buttonCreate);
 }
 
 profileButtonAddImages.addEventListener('click', function () {  
@@ -101,7 +108,7 @@ profileButtonAddImages.addEventListener('click', function () {
 profileButton.addEventListener('click', function () {  
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  activeButton(buttonSave);
+  activeButton(buttonSave, selectors);
   openPopup(popupProfile);
 }); 
 
@@ -119,8 +126,6 @@ popupCloseProfile.addEventListener('click', function () {
 
 popupCloseAddImages.addEventListener('click', function () {  
   closePopup(popupAddImages);
-  nameImage.value = '';
-  linkImage.value = '';
 });  
 
 popupProfile.addEventListener('submit', formSubmitHandler);
