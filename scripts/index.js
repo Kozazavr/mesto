@@ -36,6 +36,13 @@ function findInputError (popup) {
   });
 }
 
+function clearInputs (popup) {
+  if(popup.classList.contains('popup_add-images')) {
+    nameImage.value = '';
+    linkImage.value = '';
+  }
+}
+
 function closeEsc (evt) {
   if(evt.key === 'Escape') {
     const currentPopup = document.querySelector('.popup_opened');
@@ -46,21 +53,11 @@ function closeEsc (evt) {
 function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeEsc); 
-  inactiveButton(buttonCreate, selectors); 
 }
 
-function clearInputs (popup) {
-  if(popup.classList.contains('popup_add-images')) {
-    nameImage.value = '';
-    linkImage.value = '';
-  }
-}
- 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeEsc);
-  clearInputs(popupAddImages);
-  findInputError(popup);
 }
 
 function clickCard(cardImage, cardTitle) {
@@ -106,9 +103,11 @@ function formSubmitImages (evt) {
   });
   cardContainer.prepend(item);
   closePopup(popupAddImages);  
+  clearInputs(popupAddImages);
 }
 
-profileButtonAddImages.addEventListener('click', function () {  
+profileButtonAddImages.addEventListener('click', function () {
+  inactiveButton(buttonCreate, selectors);   
   openPopup(popupAddImages);
 });  
 
@@ -123,23 +122,36 @@ function closePopupOverlay(evt) {
   const openedPopup = document.querySelector('.popup_opened');
   if(evt.target.classList.contains('popup_opened')) {
     closePopup(openedPopup);
+    if(openedPopup === popupAddImages) {
+      clearInputs(openedPopup);
+      findInputError(openedPopup);
+    } else if(openedPopup === popupProfile) {
+      findInputError(popupProfile);
+    }
   }
 }
 
-document.addEventListener('click', closePopupOverlay);
-popupCloseProfile.addEventListener('click', function () {   
+popupProfile.addEventListener('click', closePopupOverlay);
+popupAddImages.addEventListener('click', closePopupOverlay);
+popupViewImages.addEventListener('click', closePopupOverlay);
+
+popupCloseProfile.addEventListener('click', function () { 
   closePopup(popupProfile);
+  findInputError(popupProfile);  
 });  
 
 popupCloseAddImages.addEventListener('click', function () {  
   closePopup(popupAddImages);
+  clearInputs(popupAddImages);
+  findInputError(popupAddImages);
+});  
+
+popupCloseViewImage.addEventListener('click', function () {  
+  closePopup(popupViewImages);
 });  
 
 popupProfile.addEventListener('submit', formSubmitHandler);
 popupAddImages.addEventListener('submit', formSubmitImages);
-popupCloseViewImage.addEventListener('click', function () {  
-  closePopup(popupViewImages);
-});  
 
 renderCards();
 
