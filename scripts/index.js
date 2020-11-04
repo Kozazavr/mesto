@@ -71,18 +71,17 @@ function clearInputs (popup) {
   }
 }
 
-function clickCard(evt) {
-    const targetCard = evt.target;
-    const targetTitle = targetCard.querySelector('.card__title');
-    console.log(evt.target);
-    // popupPicture.src = targetCard.src;
-    // popupPictureTitle.textContent = targetTitle.textContent;
-    // openPopup(popupViewImages);
+function clickCard(card) {
+    const targetImage = card.querySelector('.card__image');
+    const targetTitle = card.querySelector('.card__title');
+    popupPicture.src = targetImage.src;
+    popupPictureTitle.textContent = targetTitle.textContent;
+    openPopup(popupViewImages);
   }
 
 initialCards.forEach((item) => {
   const card = new Card(item, '#card').generateCard();
-  card.querySelector('.card__image').addEventListener('click', clickCard);
+  card.querySelector('.card__image').addEventListener('click', () => {clickCard(card)});
   cardContainer.append(card);
 });
 
@@ -107,6 +106,7 @@ function formSubmitImages (evt) {
     link: linkImage.value
   };
   const card = new Card(item, '#card').generateCard();
+  card.querySelector('.card__image').addEventListener('click', () => {clickCard(card)});
   cardContainer.prepend(card);
   closePopup(popupAddImages);  
   clearInputs(popupAddImages);
