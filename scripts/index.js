@@ -16,7 +16,6 @@ const linkImage = document.querySelector('.popup__input_type_image-link');
 const popupViewImages = document.querySelector('.popup_view-images');
 const popupPicture = document.querySelector('.popup__picture');
 const popupPictureTitle = document.querySelector('.popup__picture-title');
-
 const buttonSave = popupProfile.querySelector('.popup__button_save'); 
 const buttonCreate = popupAddImages.querySelector('.popup__button_create');
 
@@ -108,6 +107,8 @@ function formSubmitImages (evt) {
 
 profileButtonAddImages.addEventListener('click', function () {
   inactiveButton(buttonCreate, selectors);   
+  clearInputs(popupAddImages);
+  findInputError(popupAddImages);
   openPopup(popupAddImages);
 });  
 
@@ -115,6 +116,7 @@ profileButton.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   activeButton(buttonSave, selectors);
+  findInputError(popupProfile);
   openPopup(popupProfile);
 }); 
 
@@ -122,12 +124,6 @@ function closePopupOverlay(evt) {
   const openedPopup = document.querySelector('.popup_opened');
   if(evt.target.classList.contains('popup_opened')) {
     closePopup(openedPopup);
-    if(openedPopup === popupAddImages) {
-      clearInputs(openedPopup);
-      findInputError(openedPopup);
-    } else if(openedPopup === popupProfile) {
-      findInputError(popupProfile);
-    }
   }
 }
 
