@@ -79,11 +79,16 @@ function clickCard(card) {
     openPopup(popupViewImages);
   }
 
-initialCards.forEach((item) => {
+const renderCards = () => {
+   const items = initialCards.map(item => getItems(item));
+   cardContainer.append(...items);
+}
+
+const getItems = (item) => {
   const card = new Card(item, '#card').generateCard();
   card.querySelector('.card__image').addEventListener('click', () => {clickCard(card)});
-  cardContainer.append(card);
-});
+  return card;
+}
 
 function findInputError (popup) {
   const arrayList = Array.from(popup.querySelectorAll('.popup__input'));
@@ -105,8 +110,7 @@ function formSubmitImages (evt) {
     name: nameImage.value,
     link: linkImage.value
   };
-  const card = new Card(item, '#card').generateCard();
-  card.querySelector('.card__image').addEventListener('click', () => {clickCard(card)});
+  getItems(item);
   cardContainer.prepend(card);
   closePopup(popupAddImages);  
   clearInputs(popupAddImages);
@@ -156,5 +160,5 @@ popupCloseViewImage.addEventListener('click', function () {
 popupProfile.addEventListener('submit', formSubmitHandler);
 popupAddImages.addEventListener('submit', formSubmitImages);
 
-
+renderCards();
 
