@@ -106,12 +106,11 @@ function formSubmitHandler (evt) {
 
 function formSubmitImages (evt) {
   evt.preventDefault();
-  const item = {
+  const item = getItems({
     name: nameImage.value,
     link: linkImage.value
-  };
-  getItems(item);
-  cardContainer.prepend(card);
+  });
+  cardContainer.prepend(item);
   closePopup(popupAddImages);  
   clearInputs(popupAddImages);
 }

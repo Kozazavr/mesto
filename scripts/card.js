@@ -37,9 +37,6 @@ export default class Card {
       this._deleteCard();
     });
 
-    // this._element.querySelector('.card__image').addEventListener('click', () => {
-    //   this._clickCard(cardImage, cardTitle);
-    // });
   }
 
   _likeCardHeard() {
@@ -49,12 +46,6 @@ export default class Card {
   _deleteCard() {
     this._element.closest('.card').remove();
   }
-
-  // _clickCard(cardImage, cardTitle) {
-  //   popupPicture.src = cardImage.src;
-  //   popupPictureTitle.textContent = cardTitle.textContent;
-  //   openPopup(popupViewImages);
-  // }
 
 }
 
