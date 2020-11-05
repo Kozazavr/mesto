@@ -1,4 +1,5 @@
 import Card from './card.js';
+import FormValidate from './validate.js';
 
 const initialCards = [
   {
@@ -27,6 +28,15 @@ const initialCards = [
   }
 ]; 
 
+const selectors = {
+  formSelector: '.popup__container',  
+  inputSelector: '.popup__input',    
+  submitButtonSelector: '.popup__button',  
+  inactiveButtonClass: 'popup__button_inactive',
+  inputErrorClass: 'popup__input_error',  
+  errorClass: 'popup__input_error-text'
+}
+
 const popupProfile = document.querySelector('.popup_profile');
 const popupAddImages = document.querySelector('.popup_add-images');
 const profileButtonAddImages = document.querySelector('.profile__button-add-images'); 
@@ -44,8 +54,6 @@ const cardContainer = document.querySelector('.cards');
 const nameImage = document.querySelector('.popup__input_type_image-name');
 const linkImage = document.querySelector('.popup__input_type_image-link');
 const popupViewImages = document.querySelector('.popup_view-images');
-const buttonSave = popupProfile.querySelector('.popup__button_save'); 
-const buttonCreate = popupAddImages.querySelector('.popup__button_create');
 
 function closeEsc (evt) {
   if(evt.key === 'Escape') {
@@ -90,11 +98,8 @@ const getItems = (item) => {
   return card;
 }
 
-function findInputError (popup) {
-  const arrayList = Array.from(popup.querySelectorAll('.popup__input'));
-  arrayList.forEach((inputElement) => {
-    hideInputError(popup, inputElement, selectors);
-  });
+function inclusionValidation(popup) {
+  return new FormValidate(selectors, popup).enableValidation();
 }
 
 function formSubmitHandler (evt) {
@@ -116,17 +121,15 @@ function formSubmitImages (evt) {
 }
 
 profileButtonAddImages.addEventListener('click', function () {
-  inactiveButton(buttonCreate, selectors);   
+  inclusionValidation(popupAddImages);
   clearInputs(popupAddImages);
-  findInputError(popupAddImages);
   openPopup(popupAddImages);
 });  
 
 profileButton.addEventListener('click', function () {  
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  activeButton(buttonSave, selectors);
-  findInputError(popupProfile);
+  inclusionValidation(popupProfile);  
   openPopup(popupProfile);
 }); 
 
@@ -143,13 +146,11 @@ popupViewImages.addEventListener('click', closePopupOverlay);
 
 popupCloseProfile.addEventListener('click', function () { 
   closePopup(popupProfile);
-  findInputError(popupProfile);  
 });  
 
 popupCloseAddImages.addEventListener('click', function () {  
   closePopup(popupAddImages);
   clearInputs(popupAddImages);
-  findInputError(popupAddImages);
 });  
 
 popupCloseViewImage.addEventListener('click', function () {  
