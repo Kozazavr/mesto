@@ -1,32 +1,7 @@
+import {initialCards} from './array.js';
 import Card from './card.js';
-import FormValidate from './validate.js';
+import FormValidator from './FormValidator.js';
 
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
 
 const selectors = {
   formSelector: '.popup__container',  
@@ -47,6 +22,8 @@ const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const popupCloseProfile = document.querySelector('.popup__close_profile');
 const popupCloseAddImages = document.querySelector('.popup__close_add-images');
+const submitAddImages = document.querySelector('.popup__button_create');
+const submitProfile  = document.querySelector('.popup__button_save');
 const popupPicture = document.querySelector('.popup__picture');
 const popupPictureTitle = document.querySelector('.popup__picture-title');
 const popupCloseViewImage= document.querySelector('.popup__close_view-image');
@@ -54,6 +31,7 @@ const cardContainer = document.querySelector('.cards');
 const nameImage = document.querySelector('.popup__input_type_image-name');
 const linkImage = document.querySelector('.popup__input_type_image-link');
 const popupViewImages = document.querySelector('.popup_view-images');
+          
 
 function closeEsc (evt) {
   if(evt.key === 'Escape') {
@@ -73,10 +51,8 @@ function closePopup (popup) {
 }
 
 function clearInputs (popup) {
-  if(popup.classList.contains('popup_add-images')) {
-    nameImage.value = '';
-    linkImage.value = '';
-  }
+  const form = popup.querySelector('.popup__container');
+  form.reset();
 }
 
 function clickCard(card) {
@@ -88,19 +64,20 @@ function clickCard(card) {
   }
 
 const renderCards = () => {
-   const items = initialCards.map(item => getItems(item));
+   const items = initialCards.map(item => getCard(item));
    cardContainer.append(...items);
 }
 
-const getItems = (item) => {
+const getCard = (item) => {
   const card = new Card(item, '#card').generateCard();
   card.querySelector('.card__image').addEventListener('click', () => {clickCard(card)});
   return card;
 }
 
-function inclusionValidation(popup) {
-  return new FormValidate(selectors, popup).enableValidation();
-}
+const validatePopupProfile = new FormValidator(selectors, popupProfile);
+validatePopupProfile.enableValidation();
+const validatePopupAddImages = new FormValidator(selectors, popupAddImages);
+validatePopupAddImages.enableValidation();
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
@@ -111,17 +88,17 @@ function formSubmitHandler (evt) {
 
 function formSubmitImages (evt) {
   evt.preventDefault();
-  const item = getItems({
+  const item = getCard({
     name: nameImage.value,
     link: linkImage.value
   });
   cardContainer.prepend(item);
   closePopup(popupAddImages);  
-  clearInputs(popupAddImages);
 }
 
 profileButtonAddImages.addEventListener('click', function () {
-  inclusionValidation(popupAddImages);
+  validatePopupAddImages.inactiveButton(submitAddImages);
+  // validatePopupAddImages.hideInputError(popupAddImages, inputElement)
   clearInputs(popupAddImages);
   openPopup(popupAddImages);
 });  
@@ -129,7 +106,7 @@ profileButtonAddImages.addEventListener('click', function () {
 profileButton.addEventListener('click', function () {  
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  inclusionValidation(popupProfile);  
+  validatePopupProfile.activeButton(submitProfile); 
   openPopup(popupProfile);
 }); 
 
@@ -150,7 +127,6 @@ popupCloseProfile.addEventListener('click', function () {
 
 popupCloseAddImages.addEventListener('click', function () {  
   closePopup(popupAddImages);
-  clearInputs(popupAddImages);
 });  
 
 popupCloseViewImage.addEventListener('click', function () {  

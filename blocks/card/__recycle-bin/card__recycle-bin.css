@@ -15,5 +15,5 @@
 .card__recycle-bin:hover {
   transition: opacity 0.3s;
   opacity: 60%;
-  cursor: url('../../../images/cursor.svg'), auto;
+  cursor: pointer;
 }

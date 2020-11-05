@@ -17,7 +17,7 @@
   border-radius: 1px;
   transition: opacity 0.3s;
   opacity: 60%;
-  cursor: url('../../../images/cursor.svg'), auto;
+  cursor: pointer;
   outline: none;
 }
 

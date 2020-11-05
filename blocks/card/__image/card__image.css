@@ -8,5 +8,9 @@
   
 }
 
+.card__image:hover {
+  cursor: pointer;
+}
+
 
 

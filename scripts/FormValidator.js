@@ -1,4 +1,4 @@
-export default class FormValidate {
+export default class FormValidator {
   constructor(selectors, popup) {
     this._formSelector = selectors.formSelector;
     this._inputSelector = selectors.inputSelector;
@@ -20,9 +20,7 @@ export default class FormValidate {
   _setEventListeners(form) {
     const inputList = Array.from(form.querySelectorAll(this._inputSelector));
     const buttonElement = form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(inputList, buttonElement); 
     inputList.forEach((inputElement) => {
-      this._hideInputError(form, inputElement);
       inputElement.addEventListener('input', () => {
         this._isValid(form, inputElement);
         this._toggleButtonState(inputList, buttonElement);
@@ -32,9 +30,9 @@ export default class FormValidate {
 
   _toggleButtonState(inputList, buttonElement) {
     if(this._hasInvalidInput(inputList)) {
-      this._inactiveButton(buttonElement);
+      this.inactiveButton(buttonElement);
     } else {
-      this._activeButton(buttonElement);
+      this.activeButton(buttonElement);
     }
   }
 
@@ -43,7 +41,7 @@ export default class FormValidate {
       const messageError = inputElement.validationMessage;
       this._showInputError(form, inputElement, messageError);
     } else {
-      this._hideInputError(form, inputElement);
+      this.hideInputError(form, inputElement);
     }
   }
 
@@ -53,12 +51,12 @@ export default class FormValidate {
     });
   }
 
-  _inactiveButton(buttonElement) {
+  inactiveButton(buttonElement) {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute('disabled', 'secondAttribute');
   }
 
-  _activeButton(buttonElement) {
+  activeButton(buttonElement) {
     buttonElement.classList.remove(this._inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
   }
@@ -70,7 +68,7 @@ export default class FormValidate {
     inputError.classList.add(this._errorClass);
   }
 
-  _hideInputError(form, inputElement) {
+  hideInputError(form, inputElement) {
     const inputError = form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
     inputError.classList.remove(this._errorClass);
@@ -78,4 +76,4 @@ export default class FormValidate {
   }
 }
 
-export {FormValidate};
+export {FormValidator};
