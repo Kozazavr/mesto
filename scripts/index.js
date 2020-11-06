@@ -32,7 +32,6 @@ const nameImage = document.querySelector('.popup__input_type_image-name');
 const linkImage = document.querySelector('.popup__input_type_image-link');
 const popupViewImages = document.querySelector('.popup_view-images');
           
-
 function closeEsc (evt) {
   if(evt.key === 'Escape') {
     const currentPopup = document.querySelector('.popup_opened');
@@ -98,7 +97,8 @@ function formSubmitImages (evt) {
 
 profileButtonAddImages.addEventListener('click', function () {
   validatePopupAddImages.inactiveButton(submitAddImages);
-  // validatePopupAddImages.hideInputError(popupAddImages, inputElement)
+  validatePopupAddImages.hideInputError(popupAddImages, nameImage);
+  validatePopupAddImages.hideInputError(popupAddImages, linkImage);
   clearInputs(popupAddImages);
   openPopup(popupAddImages);
 });  
@@ -107,6 +107,8 @@ profileButton.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   validatePopupProfile.activeButton(submitProfile); 
+  validatePopupProfile.hideInputError(popupProfile, inputName);
+  validatePopupProfile.hideInputError(popupProfile, inputJob);
   openPopup(popupProfile);
 }); 
 
