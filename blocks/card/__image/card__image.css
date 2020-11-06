@@ -1,15 +1,34 @@
 .card__image {
+  display: block;
   object-fit: cover;
   width: 100%;
   height: 282px;  
   border-radius: 10px 10px 0 0;
   margin: 0;
   padding: 0;
-  
 }
 
 .card__image:hover {
   cursor: pointer;
+}
+
+.card__image::after {
+  background-color:#dcdcdc;
+  content: 'Ой!..';
+
+  display: block;
+  height: 282px;
+  width: 100%;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 282px;
+  text-align: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+ 
 }
 
 
