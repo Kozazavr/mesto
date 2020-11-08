@@ -1,7 +1,7 @@
 import {initialCards} from './array.js';
 import Card from './card.js';
 import FormValidator from './FormValidator.js';
-
+import {Section} from './Section.js';
 
 const selectors = {
   formSelector: '.popup__container',  
@@ -27,7 +27,6 @@ const submitProfile  = document.querySelector('.popup__button_save');
 const popupPicture = document.querySelector('.popup__picture');
 const popupPictureTitle = document.querySelector('.popup__picture-title');
 const popupCloseViewImage= document.querySelector('.popup__close_view-image');
-const cardContainer = document.querySelector('.cards');
 const nameImage = document.querySelector('.popup__input_type_image-name');
 const linkImage = document.querySelector('.popup__input_type_image-link');
 const popupViewImages = document.querySelector('.popup_view-images');
@@ -62,15 +61,15 @@ function clickCard(card) {
     openPopup(popupViewImages);
   }
 
-const renderCards = () => {
-   const items = initialCards.map(item => getCard(item));
-   cardContainer.append(...items);
-}
-
-const getCard = (item) => {
+function renderer(item) {
   const card = new Card(item, '#card').generateCard();
   card.querySelector('.card__image').addEventListener('click', () => {clickCard(card)});
   return card;
+}
+
+function rendererSection (items) {
+  const cardSection = new Section(items, renderer, '.cards');
+  cardSection.renderCards();
 }
 
 const validatePopupProfile = new FormValidator(selectors, popupProfile);
@@ -87,11 +86,10 @@ function formSubmitHandler (evt) {
 
 function formSubmitImages (evt) {
   evt.preventDefault();
-  const item = getCard({
-    name: nameImage.value,
+  const item = [{name: nameImage.value,
     link: linkImage.value
-  });
-  cardContainer.prepend(item);
+  }];
+  rendererSection(item);
   closePopup(popupAddImages);  
 }
 
@@ -138,5 +136,5 @@ popupCloseViewImage.addEventListener('click', function () {
 popupProfile.addEventListener('submit', formSubmitHandler);
 popupAddImages.addEventListener('submit', formSubmitImages);
 
-renderCards();
+rendererSection(initialCards);
 
