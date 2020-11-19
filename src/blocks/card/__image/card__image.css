@@ -1,0 +1,30 @@
+.card__image {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 282px;  
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  padding: 0;
+}
+
+.card__image:hover {
+  cursor: pointer;
+}
+
+img:after {
+  display: block;
+  width: 100%;
+  height: 282px;  
+  background-color: #000000;
+  content: "Image not found";
+  color: #ffffff; 
+  text-align: center;
+  font-size: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+}
+
+

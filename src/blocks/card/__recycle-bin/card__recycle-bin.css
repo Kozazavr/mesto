@@ -1,0 +1,19 @@
+.card__recycle-bin {
+  background-image: url('../../../images/card_recycle_bin.svg');
+  min-width: 18px;
+  min-height: 19.3px;
+  padding: 0;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent; 
+  outline: none; 
+  position: absolute; 
+  top: 18px;
+  right: 15px;
+}
+
+.card__recycle-bin:hover {
+  transition: opacity 0.3s;
+  opacity: 0.6;
+  cursor: pointer;
+}
