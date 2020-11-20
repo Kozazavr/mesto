@@ -3,13 +3,6 @@ export default class Popup {
     this._selectorPopup = selectorPopup;
   }
 
-  _getPopup() {
-    const popupElement = document
-    .querySelector(this._selectorPopup)
-    .content 
-    return popupElement;
-  }
-
   open(popupElement) {
     popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose.bind(this));  
@@ -35,8 +28,6 @@ export default class Popup {
     });
   }
 }
-
-
 
 
 
