@@ -1,10 +1,11 @@
 export default class Card {
 
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._image = data.link;
     this._alt = data.name;
     this._cardSelector = cardSelector;
+    this.handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -36,6 +37,10 @@ export default class Card {
     this._element.querySelector('.card__recycle-bin').addEventListener('click', () => {
       this._deleteCard();
     });
+
+    this._element.querySelector('.card__image').addEventListener('click', () => {    
+      this.handleCardClick();                                                        
+    });                                                                              
 
   }
 
