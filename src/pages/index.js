@@ -25,13 +25,18 @@ import './index.css';
 function rendererSection (items) {
   const cardSection = new Section({items: items, renderer: (item)=> {
     const card = new Card(item, '#card', () => {
-      viewPopupImage.open(popupViewImages);
+      // const targetImage = card.querySelector('.card__image').src; 
+      // const targetTitle = card.querySelector('.card__title').textContent;
+      // console.log(targetImage);
+      viewPopupImage.open({name: targetTitle, link: targetImage});  ////неверно написан метод open, открытие попапа картинки пока не работает по другому!!!
     }).generateCard();
-    const viewPopupImage = new PopupWithImage(card, '.popup_view-images');
+    // const viewPopupImage = new PopupWithImage(card, '.popup_view-images');
     cardSection.addItem(card);
   }}, '.cards');
   cardSection.renderCards();
 }
+
+const viewPopupImage = new PopupWithImage(card, '.popup_view-images');
 
 const validatePopupProfile = new FormValidator(selectors, popupProfileForm);
 validatePopupProfile.enableValidation();
@@ -40,14 +45,15 @@ validatePopupAddImages.enableValidation();
 
 const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
 
-const profilePopup = new Popup('.popup_profile');
-const popupAddImage = new Popup('.popup_add-images');  
+// const profilePopup = new Popup('.popup_profile');
+// const popupAddImage = new Popup('.popup_add-images');  
 
 profileButtonAddImages.addEventListener('click', function () {
   validatePopupAddImages.inactiveButton(submitAddImages);
   validatePopupAddImages.hideInputError(popupAddImagesForm, nameImage);
   validatePopupAddImages.hideInputError(popupAddImagesForm, linkImage);
-  popupAddImage.open(popupAddImagesForm);
+  // popupAddImage.open(popupAddImagesForm);
+  popupAddImage.open();
 });  
 
 profileButton.addEventListener('click', function () {  
@@ -56,24 +62,25 @@ profileButton.addEventListener('click', function () {
   validatePopupProfile.activeButton(submitProfile); 
   validatePopupProfile.hideInputError(popupProfileForm, inputName);
   validatePopupProfile.hideInputError(popupProfileForm, inputJob);
-  profilePopup.open(popupProfileForm);
+  // profilePopup.open(popupProfileForm);
+  profilePopup.open(); 
 }); 
 
 const submitProfileForm = new PopupWithForm({selectorPopup: '.popup_profile', submitForm: (item) => {  
   userInfo.setUserInfo(item);
-  profilePopup.close(popupProfileForm);
+  profilePopup.close(); ///не работает метод close
 } 
 });
 
 const submitAddImageForm = new PopupWithForm({selectorPopup: '.popup_add-images', submitForm: (item) => {  
   const array = [item];
   rendererSection(array);
-  submitAddImageForm.close(popupAddImagesForm);
+  submitAddImageForm.close();  ///не работает метод close
 } 
 });
 
-submitProfileForm.setEventListener(popupProfileForm);
-submitAddImageForm.setEventListener(popupAddImagesForm);
+submitProfileForm.setEventListener();
+submitAddImageForm.setEventListener();
 
 rendererSection(initialCards.reverse());
 

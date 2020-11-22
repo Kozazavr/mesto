@@ -2,17 +2,17 @@ import Popup from './Popup.js';
 
 export default class PopupWithImage extends Popup {
   constructor(card, selectorPopup) {
-    super(selectorPopup);
-    this._card = card;
+    super(selectorPopup);    //селектор попапа
+    this._card = card;      ///разметка карточки
   }
   
-  open(popupElement) {
-    const targetImage = this._card.querySelector('.card__image');
-    const targetTitle = this._card.querySelector('.card__title');
-    const popupPicture = popupElement.querySelector('.popup__picture');
-    const popupPictureTitle = popupElement.querySelector('.popup__picture-title');
-    popupPicture.src = targetImage.src;
-    popupPictureTitle.textContent = targetTitle.textContent;
-    super.open(popupElement);
+  open({name, link}) {  //название карточки и ссылка ///Сам по себе текущий попап будет доступен через this, когда вы исправить класс Popup
+    const popupPicture = this._openPopup.querySelector('.popup__picture');
+    const popupPictureTitle = this._openPopup.querySelector('.popup__picture-title');
+    popupPicture.src = link.src;  ///  <img class="card__image" alt="Фото" src="#"> 
+    console.log(popupPicture.src);
+    popupPictureTitle.textContent = link.textContent;  
+    popupPictureTitle.textContent = name.textContent;   /// <h2 class="card__title"></h2>
+    super.open();
   }
 }
