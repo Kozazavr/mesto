@@ -34,8 +34,8 @@ const selectors = {
   errorClass: 'popup__input_error-text'
 }
 
-const popupProfile = document.querySelector('.popup_profile');
-const popupAddImages = document.querySelector('.popup_add-images');
+const popupProfileForm = document.querySelector('.popup_profile');
+const popupAddImagesForm = document.querySelector('.popup_add-images');
 const profileButtonAddImages = document.querySelector('.profile__button-add-images'); 
 const profileButton = document.querySelector('.profile__button');
 const submitAddImages = document.querySelector('.popup__button_create');
@@ -43,17 +43,21 @@ const submitProfile  = document.querySelector('.popup__button_save');
 const nameImage = document.querySelector('.popup__input_type_image-name');
 const linkImage = document.querySelector('.popup__input_type_image-link');
 const popupViewImages = document.querySelector('.popup_view-images');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputJob = document.querySelector('.popup__input_type_job');
 
 export {
   initialCards, 
   selectors, 
-  popupProfile, 
-  popupAddImages, 
+  popupProfileForm, 
+  popupAddImagesForm, 
   profileButtonAddImages, 
   profileButton, 
   submitAddImages, 
   submitProfile, 
   nameImage, 
   linkImage, 
-  popupViewImages
+  popupViewImages,
+  inputName,
+  inputJob
 };

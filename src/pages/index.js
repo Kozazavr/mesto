@@ -1,15 +1,17 @@
 import {
   initialCards, 
   selectors,
-  popupProfile,
-  popupAddImages,
+  popupProfileForm,
+  popupAddImagesForm,
   profileButtonAddImages,
   profileButton,
   submitAddImages,
   submitProfile,
   nameImage,
   linkImage,
-  popupViewImages
+  popupViewImages,
+  inputName,
+  inputJob
 } from '../utils/constants.js';
 import Card from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -20,79 +22,58 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css'; 
 
-const inputName = document.querySelector('.popup__input_type_name');
-const inputJob = document.querySelector('.popup__input_type_job');
-          
-function clearInputs (popup) {
-  const form = popup.querySelector('.popup__container');
-  form.reset();
-}
-
-const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
-
-const profileSubmitForm = new PopupWithForm({selectorPopup: '.popup_profile', submitForm: (item) => {
-  userInfo.setUserInfo(item);
-  profilePopup.close(popupProfile);
-} 
-});
-
-const addImagesSubmitForm = new PopupWithForm({selectorPopup: '.popup_add-images', submitForm: (item) => {
-  const array = [item];
-  rendererSection(array);
-  addImagesSubmitForm.close(popupAddImages);
-} 
-});
-
-profileSubmitForm.setEventListener(popupProfile);
-addImagesSubmitForm.setEventListener(popupAddImages);
-
-const profilePopup = new Popup('.popup_profile');
-const addPopup = new Popup('.popup_add-images');
-
 function rendererSection (items) {
   const cardSection = new Section({items: items, renderer: (item)=> {
     const card = new Card(item, '#card', () => {
-      viewPopup.open(popupViewImages);
+      viewPopupImage.open(popupViewImages);
     }).generateCard();
-    const viewPopup = new PopupWithImage(card, '.popup_view-images');
+    const viewPopupImage = new PopupWithImage(card, '.popup_view-images');
     cardSection.addItem(card);
   }}, '.cards');
   cardSection.renderCards();
 }
 
-const validatePopupProfile = new FormValidator(selectors, popupProfile);
+const validatePopupProfile = new FormValidator(selectors, popupProfileForm);
 validatePopupProfile.enableValidation();
-const validatePopupAddImages = new FormValidator(selectors, popupAddImages);
+const validatePopupAddImages = new FormValidator(selectors, popupAddImagesForm);
 validatePopupAddImages.enableValidation();
+
+const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
+
+const profilePopup = new Popup('.popup_profile');
+const popupAddImage = new Popup('.popup_add-images');  
 
 profileButtonAddImages.addEventListener('click', function () {
   validatePopupAddImages.inactiveButton(submitAddImages);
-  validatePopupAddImages.hideInputError(popupAddImages, nameImage);
-  validatePopupAddImages.hideInputError(popupAddImages, linkImage);
-  clearInputs(popupAddImages);
-  addPopup.open(popupAddImages);
+  validatePopupAddImages.hideInputError(popupAddImagesForm, nameImage);
+  validatePopupAddImages.hideInputError(popupAddImagesForm, linkImage);
+  popupAddImage.open(popupAddImagesForm);
 });  
 
-
 profileButton.addEventListener('click', function () {  
-  inputName.value = Object.keys(userInfo.getUserInfo());    ////
-  inputJob.value = Object.values(userInfo.getUserInfo());   /////
+  inputName.value = Object.keys(userInfo.getUserInfo());    
+  inputJob.value = Object.values(userInfo.getUserInfo());   
   validatePopupProfile.activeButton(submitProfile); 
-  validatePopupProfile.hideInputError(popupProfile, inputName);
-  validatePopupProfile.hideInputError(popupProfile, inputJob);
-  profilePopup.open(popupProfile);
+  validatePopupProfile.hideInputError(popupProfileForm, inputName);
+  validatePopupProfile.hideInputError(popupProfileForm, inputJob);
+  profilePopup.open(popupProfileForm);
 }); 
 
-function closePopupOverlay(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
-  if(evt.target.classList.contains('popup_opened')) {
-    addPopup.close(openedPopup);
-  }
-}
+const submitProfileForm = new PopupWithForm({selectorPopup: '.popup_profile', submitForm: (item) => {  
+  userInfo.setUserInfo(item);
+  profilePopup.close(popupProfileForm);
+} 
+});
 
-popupProfile.addEventListener('click', closePopupOverlay);
-popupAddImages.addEventListener('click', closePopupOverlay);
-popupViewImages.addEventListener('click', closePopupOverlay);
+const submitAddImageForm = new PopupWithForm({selectorPopup: '.popup_add-images', submitForm: (item) => {  
+  const array = [item];
+  rendererSection(array);
+  submitAddImageForm.close(popupAddImagesForm);
+} 
+});
+
+submitProfileForm.setEventListener(popupProfileForm);
+submitAddImageForm.setEventListener(popupAddImagesForm);
 
 rendererSection(initialCards.reverse());
 
