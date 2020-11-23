@@ -40,8 +40,6 @@ const profileButtonAddImages = document.querySelector('.profile__button-add-imag
 const profileButton = document.querySelector('.profile__button');
 const submitAddImages = document.querySelector('.popup__button_create');
 const submitProfile  = document.querySelector('.popup__button_save');
-const nameImage = document.querySelector('.popup__input_type_image-name');
-const linkImage = document.querySelector('.popup__input_type_image-link');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
 const popupViewImagesSelector = '.popup_view-images';
@@ -61,8 +59,6 @@ export {
   profileButton, 
   submitAddImages, 
   submitProfile, 
-  nameImage, 
-  linkImage, 
   inputName,
   inputJob,
   popupViewImagesSelector,
