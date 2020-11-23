@@ -69,11 +69,17 @@ export default class FormValidator {
   }
 
   hideInputError(form, inputElement) {
-    const inputError = form.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(this._inputErrorClass);
-    inputError.classList.remove(this._errorClass);
-    inputError.textContent = ' ';  
+    if(inputElement === undefined) {
+      const inputList = form.querySelectorAll(this._inputSelector);
+      inputList.forEach((item) => {
+        this.hideInputError(form, item);
+      }); 
+    } else {
+      const inputError = form.querySelector(`#${inputElement.id}-error`);
+      inputElement.classList.remove(this._inputErrorClass);
+      inputError.classList.remove(this._errorClass);
+      inputError.textContent = ' ';  
+    }
   }
 }
-
 

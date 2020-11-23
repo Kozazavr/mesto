@@ -1,14 +1,11 @@
 export default class Popup {
   constructor(selectorPopup) {
-    // this._selectorPopup = selectorPopup;   
-    this._openPopup = document.querySelector(selectorPopup);
+    this._openPopup = document.querySelector(selectorPopup);
   }
 
   open() {
     this._openPopup.classList.add('popup_opened');
-    // this.setEventListener(this._openPopup); ///Данный метод для каждого попапа должен вызываться в index.js
-    document.addEventListener('keydown', this._handleEscClose.bind(this));    
-
+    document.addEventListener('keydown', this._handleEscClose.bind(this));  
   }
 
   _handleEscClose(evt) {
@@ -26,15 +23,16 @@ export default class Popup {
 
   setEventListener() {
     const closePopupButton = this._openPopup.querySelector('.popup__close');
+
     closePopupButton.addEventListener('click', () => {
       this.close();
     });
+
     this._openPopup.addEventListener('click', (evt) => {
       if(evt.target.classList.contains('popup_opened')) {
         this.close();
       }
     });
-    
   }
 }
 

@@ -4,7 +4,7 @@ export default class Section {
     this.renderer = renderer;
     this._container = document.querySelector(selectorContainer);
   }
-
+    
   renderCards() {
     this._items.map(item => {
       this.renderer(item);
