@@ -13,7 +13,7 @@ import {
   inputName,
   inputJob
 } from '../utils/constants.js';
-import Card from '../components/card.js';
+import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
@@ -22,12 +22,19 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css'; 
 
+// const templateCard = document.querySelector('.cardTemplate').className;  //надо получить класс
+const viewPopupImage = new PopupWithImage('.popup_view-images');
+
 function rendererSection (items) {
   const cardSection = new Section({items: items, renderer: (item)=> {
-    const card = new Card(item, '#card', () => {
-      viewPopupImage.open(popupViewImages);
+    const card = new Card(item, '#card', () => {  //заменить хардкор переменной #card
+      const targetImage = card.querySelector('.card__image');
+      const targetTitle = card.querySelector('.card__title');
+      targetImage.addEventListener('click', () => {
+        viewPopupImage.open({name: targetTitle.textContent, link: targetImage.src});
+        viewPopupImage.setEventListener();  ///где вызывать этот метод??
+      });
     }).generateCard();
-    const viewPopupImage = new PopupWithImage(card, '.popup_view-images');
     cardSection.addItem(card);
   }}, '.cards');
   cardSection.renderCards();
@@ -42,6 +49,7 @@ const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
 
 const profilePopup = new Popup('.popup_profile');
 const popupAddImage = new Popup('.popup_add-images');  
+
 
 profileButtonAddImages.addEventListener('click', function () {
   validatePopupAddImages.inactiveButton(submitAddImages);
