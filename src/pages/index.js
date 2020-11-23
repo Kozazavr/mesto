@@ -64,7 +64,6 @@ validatePopupAddImages.enableValidation();
 profileButtonAddImages.addEventListener('click', function () {
   validatePopupAddImages.inactiveButton(submitAddImages);
   validatePopupAddImages.hideInputError(popupAddImagesForm);
-  validatePopupAddImages.hideInputError(popupAddImagesForm);
   addCardPopup.open();
 });  
 
@@ -72,7 +71,6 @@ profileButton.addEventListener('click', function () {
   inputName.value = userInfo.getUserInfo().userName;    
   inputJob.value = userInfo.getUserInfo().userJob;   
   validatePopupProfile.activeButton(submitProfile); 
-  validatePopupProfile.hideInputError(popupProfileForm);
   validatePopupProfile.hideInputError(popupProfileForm);
   editUserPopup.open();
 }); 
