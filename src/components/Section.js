@@ -15,6 +15,6 @@ export default class Section {
     this._container.prepend(cards);
   }
 }
-console.log('AAA');
+
 
 

@@ -25,12 +25,12 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  close(popupForm) {
-    super.close(popupForm);
+  close() {
+    super.close();
     this._container.reset();
   }
 }
-console.log('AAA');
+
 
 
  

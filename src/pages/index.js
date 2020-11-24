@@ -17,7 +17,7 @@ import {
   popupProfileSelector,
   popupAddImagesSelector
 } from '../utils/constants.js';
-import Card from '../components/Card.js';
+import Card from '../components/card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js'; 
@@ -79,7 +79,7 @@ cardSection.renderCards();
 editUserPopup.setEventListener();
 addCardPopup.setEventListener();
 
-console.log('AAA');
+
 
 
 
