@@ -82,4 +82,4 @@ export default class FormValidator {
     }
   }
 }
-console.log('AAA');
+

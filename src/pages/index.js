@@ -79,7 +79,7 @@ cardSection.renderCards();
 editUserPopup.setEventListener();
 addCardPopup.setEventListener();
 
-console.log('AAA');
+
 
 
 
