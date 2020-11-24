@@ -2,9 +2,15 @@ export default class Section {
   constructor({items, renderer}, selectorContainer) {
     this._items = items;
     this.renderer = renderer;
-    this._container = document.querySelector(selectorContainer);
+    this._selectorContainer = selectorContainer;
   }
     
+  _getContainer() {
+    const cardContainer = document
+    .querySelector(this._selectorContainer);
+    return cardContainer;
+  }
+
   renderCards() {
     this._items.map(item => {
       this.renderer(item);
@@ -12,7 +18,7 @@ export default class Section {
   }
 
   addItem(cards) {
-    this._container.prepend(cards);
+    this._getContainer().prepend(cards);
   }
 }
 
