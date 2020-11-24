@@ -51,3 +51,4 @@ export default class Card {
   } 
 } 
 
+console.log('AAA');

@@ -30,7 +30,7 @@ export default class PopupWithForm extends Popup {
     this._container.reset();
   }
 }
-
+console.log('AAA');
 
 
  

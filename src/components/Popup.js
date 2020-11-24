@@ -34,6 +34,6 @@ export default class Popup {
     });
   }
 }
-
+console.log('AAA');
 
 

@@ -16,6 +16,6 @@ export default class UserInfo {
     this._userJob.textContent =  item.popup_job;
   }
 }
-
+console.log('AAA');
 
 

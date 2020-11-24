@@ -15,3 +15,4 @@ export default class PopupWithImage extends Popup {
   }
 }
     
+console.log('AAA');
