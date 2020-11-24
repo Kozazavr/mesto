@@ -40,11 +40,15 @@ const profileButtonAddImages = document.querySelector('.profile__button-add-imag
 const profileButton = document.querySelector('.profile__button');
 const submitAddImages = document.querySelector('.popup__button_create');
 const submitProfile  = document.querySelector('.popup__button_save');
-const nameImage = document.querySelector('.popup__input_type_image-name');
-const linkImage = document.querySelector('.popup__input_type_image-link');
-const popupViewImages = document.querySelector('.popup_view-images');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
+const popupViewImagesSelector = '.popup_view-images';
+const cardId = '#card';
+const cardsContainerSelector = '.cards';
+const profileNameSelector = '.profile__name';
+const profileJobSelector = '.profile__job';
+const popupProfileSelector = '.popup_profile';
+const popupAddImagesSelector = '.popup_add-images';
 
 export {
   initialCards, 
@@ -55,9 +59,13 @@ export {
   profileButton, 
   submitAddImages, 
   submitProfile, 
-  nameImage, 
-  linkImage, 
-  popupViewImages,
   inputName,
-  inputJob
+  inputJob,
+  popupViewImagesSelector,
+  cardId,
+  cardsContainerSelector,
+  profileNameSelector,
+  profileJobSelector,
+  popupProfileSelector,
+  popupAddImagesSelector
 };
