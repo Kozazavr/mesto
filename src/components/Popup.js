@@ -33,6 +33,3 @@ export default class Popup {
     });
   }
 }
-
-
-
