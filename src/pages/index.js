@@ -25,21 +25,19 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import './index.css'; 
 
+function createCard(item) {
+  const card = new Card(item, cardId, () => {  
+    viewPopupImage.open({name: item.name, link: item.link});
+  }).generateCard();
+  return card;
+}
+
 const viewPopupImage = new PopupWithImage(popupViewImagesSelector);
 
 const cardSection = new Section({items: initialCards.reverse(), renderer: (item)=> {
-    const card = new Card(item, cardId, () => {  
-      const targetImage = card.querySelector('.card__image');
-      const targetTitle = card.querySelector('.card__title');
-      targetImage.addEventListener('click', () => {
-        viewPopupImage.open({name: targetTitle.textContent, link: targetImage.src});
-        viewPopupImage.setEventListener();  
-      });
-    }).generateCard();
-    cardSection.addItem(card);
+    cardSection.addItem(createCard(item));
 }}, cardsContainerSelector);
 
-const cardRenderer = new Section({items: []}, cardsContainerSelector);  
 const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector});
 
 const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
@@ -49,9 +47,9 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
 });
 
 const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
+  console.log(item);
   const dataCard = {name: item.popup_name, link: item.popup_job};
-  const form = new Card(dataCard, cardId).generateCard();
-  cardRenderer.addItem(form);
+  cardSection.addItem(createCard(dataCard));
   addCardPopup.close();
 } 
 });
@@ -78,16 +76,5 @@ profileButton.addEventListener('click', function () {
 cardSection.renderCards();
 editUserPopup.setEventListener();
 addCardPopup.setEventListener();
-
-
-
-
-
-
-
-
-
- 
-  
-
+viewPopupImage.setEventListener(); 
 
