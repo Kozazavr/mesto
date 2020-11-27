@@ -47,7 +47,6 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
 });
 
 const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
-  console.log(item);
   const dataCard = {name: item.popup_name, link: item.popup_job};
   cardSection.addItem(createCard(dataCard));
   addCardPopup.close();
