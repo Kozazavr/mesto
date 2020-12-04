@@ -1,5 +1,5 @@
 import {
-  initialCards, 
+  // initialCards, 
   selectors,
   popupProfileForm,
   popupAddImagesForm,
@@ -34,9 +34,9 @@ function createCard(item) {
 
 const viewPopupImage = new PopupWithImage(popupViewImagesSelector);
 
-const cardSection = new Section({items: initialCards.reverse(), renderer: (item)=> {
-    cardSection.addItem(createCard(item));
-}}, cardsContainerSelector);
+// const cardSection = new Section({items: initialCards.reverse(), renderer: (item)=> {
+//   cardSection.addItem(createCard(item));
+// }}, cardsContainerSelector);
 
 const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector});
 
@@ -47,7 +47,6 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
 });
 
 const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
-  console.log(item);
   const dataCard = {name: item.popup_name, link: item.popup_job};
   cardSection.addItem(createCard(dataCard));
   addCardPopup.close();
@@ -73,8 +72,60 @@ profileButton.addEventListener('click', function () {
   editUserPopup.open();
 }); 
 
-cardSection.renderCards();
+// cardSection.renderCards();
 editUserPopup.setEventListener();
 addCardPopup.setEventListener();
 viewPopupImage.setEventListener(); 
 
+
+class Api {
+  constructor(options) {
+    this._url = options.url;
+    this._headers = options.headers;
+  }
+
+  getInitialCards() {
+    return fetch(this._url, {
+      headers: this._headers
+    })
+    .then((res) => {
+      if(res.ok) {
+        return res.json();
+      }
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }); 
+  }
+}
+
+//   addCards(data) {
+//     return fetch(this._url, {
+//       method: "POST", 
+//       headers: this._headers,
+//       body: JSON.stringify(data)
+//     })
+//     .then((res) => {
+//       if(res.ok) {
+//         return res.json();
+//         console.log('AAAA');
+//       }
+//       return Promise.reject(`Ошибка: ${res.status}`);
+//     }); 
+//   }
+
+// }
+
+const api = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-18/cards",
+  headers: {
+    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
+    "Content-Type": "application/json"
+  }
+}); 
+
+const cards = api.getInitialCards();
+cards.then((data) => {
+  const cardSection = new Section({items: data, renderer: (item)=> {
+    cardSection.addItem(createCard(item));
+  }}, cardsContainerSelector);
+  cardSection.renderCards();
+});
