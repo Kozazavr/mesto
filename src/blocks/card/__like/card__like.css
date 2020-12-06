@@ -15,3 +15,21 @@
   opacity: 0.6;
   cursor: pointer; 
 }
+
+
+.card__like-counter {
+  display: flex;
+  flex-direction: column;
+  max-height: 34px;
+ 
+}
+
+.card__counter {
+  margin-top: 3px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+}

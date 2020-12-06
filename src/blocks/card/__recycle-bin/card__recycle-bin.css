@@ -10,6 +10,7 @@
   position: absolute; 
   top: 18px;
   right: 15px;
+  visibility: visible;
 }
 
 .card__recycle-bin:hover {
@@ -18,3 +19,6 @@
   cursor: pointer;
 }
 
+.bin {
+  visibility: hidden;
+}

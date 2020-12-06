@@ -1,5 +1,4 @@
 import {
-  // initialCards, 
   selectors,
   popupProfileForm,
   popupAddImagesForm,
@@ -15,7 +14,8 @@ import {
   profileNameSelector,
   profileJobSelector,
   popupProfileSelector,
-  popupAddImagesSelector
+  popupAddImagesSelector,
+  profileAvatar
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -23,12 +23,14 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js'; 
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 import './index.css'; 
 
-function createCard(item) {
+function createCard(item, count) {
   const card = new Card(item, cardId, () => {  
     viewPopupImage.open({name: item.name, link: item.link});
   }).generateCard();
+  card.querySelector('.card__counter').textContent = count;
   return card;
 }
 
@@ -38,20 +40,102 @@ const viewPopupImage = new PopupWithImage(popupViewImagesSelector);
 //   cardSection.addItem(createCard(item));
 // }}, cardsContainerSelector);
 
-const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector});
+const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector, avatarSelecto: profileAvatar});
+
+
+///////////////////////////////////////
+
+const api = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-18/cards",
+  headers: {
+    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
+    "content-type": "application/json"
+  }
+}); 
+
+const api2 = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-18/users/me",
+  headers: {
+    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
+    "content-type": "application/json"
+  }
+}); 
+
+const api3 = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-18/users/me",
+  headers: {
+    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
+    "content-type": "application/json"
+  }
+}); 
 
 const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
-  userInfo.setUserInfo(item);
+  const dataUser = {name: item.popup_name, about: item.popup_job};
+  const profiNew = api3.editProfile(dataUser);
+  profiNew.then((data) => {
+    userInfo.setUserInfoProfile(data);
+    const profi = api2.getInfoFromServer();
+    profi.then((data) => {
+      const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector});
+      userInfo.setUserInfoProfile(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  }) ;
   editUserPopup.close();
-} 
+}
 });
 
-const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
-  const dataCard = {name: item.popup_name, link: item.popup_job};
-  cardSection.addItem(createCard(dataCard));
-  addCardPopup.close();
-} 
+const cards = api.getInfoFromServer();
+cards.then((data) => {
+  const cardSection = new Section({items: data, renderer: (item)=> {
+    const count = item.likes.length;
+    cardSection.addItem(createCard(item, count));
+  }}, cardsContainerSelector);
+  cardSection.renderCards();
+})
+.catch((err) => {
+  console.log(err);
 });
+
+const profi = api2.getInfoFromServer();
+profi.then((data) => {
+  const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector, avatarSelector: profileAvatar});
+  userInfo.setUserInfo(data);
+})
+.catch((err) => {
+  console.log(err);
+});
+
+const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
+  const dataCard = {name: item.popup_name, link: item.popup_job, id: item.id};
+  const container = document.querySelector(cardsContainerSelector);
+  const newCards = api.addCard(dataCard);
+  newCards.then((data) => {
+    console.log(data._id);
+    return container.prepend(createCard(data, 0));
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  addCardPopup.close();
+}
+});
+  
+ 
+// const cardSection = new Section({items: item, renderer: (item)=> { 
+  //     const dataCard = {name: item.popup_name, link: item.popup_job};
+  //     cardSection.addItem(createCard(dataCard));
+  //   }}, cardsContainerSelector);
+  //   cardSection.renderCards();
+  //   addCardPopup.close();
+  //   }
+  // });
+
 
 const validatePopupProfile = new FormValidator(selectors, popupProfileForm);
 validatePopupProfile.enableValidation();
@@ -66,66 +150,50 @@ profileButtonAddImages.addEventListener('click', function () {
 
 profileButton.addEventListener('click', function () {  
   inputName.value = userInfo.getUserInfo().userName;    
-  inputJob.value = userInfo.getUserInfo().userJob;   
+  inputJob.value = userInfo.getUserInfo().userJob;  
   validatePopupProfile.activeButton(submitProfile); 
   validatePopupProfile.hideInputError(popupProfileForm);
   editUserPopup.open();
 }); 
 
-// cardSection.renderCards();
 editUserPopup.setEventListener();
-addCardPopup.setEventListener();
+addCardPopup.setEventListener();  
 viewPopupImage.setEventListener(); 
 
 
-class Api {
-  constructor(options) {
-    this._url = options.url;
-    this._headers = options.headers;
-  }
 
-  getInitialCards() {
-    return fetch(this._url, {
-      headers: this._headers
-    })
-    .then((res) => {
-      if(res.ok) {
-        return res.json();
-      }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }); 
-  }
-}
 
-//   addCards(data) {
-//     return fetch(this._url, {
-//       method: "POST", 
-//       headers: this._headers,
-//       body: JSON.stringify(data)
-//     })
-//     .then((res) => {
-//       if(res.ok) {
-//         return res.json();
-//         console.log('AAAA');
-//       }
-//       return Promise.reject(`Ошибка: ${res.status}`);
-//     }); 
-//   }
 
+// const profiNew = api3.editProfile({name: "ssss", about: "Korben"});
+// profiNew.then((data) => {
+//  console.log(data);
+//  userInfo.setUserInfoProfile(data);
+// })
+// .catch((err) => {
+//   console.log(err);
+// });
+
+
+// const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
+//   const dataUser = {name: item.popup_name, about: item.popup_job};
+//   console.log(dataUser);
+//   userInfo.setUserInfo(item);
+//   editUserPopup.close();
+// } 
+// });
+
+
+// const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
+//   const dataCard = {name: item.popup_name, link: item.popup_job, id: item.id};
+//   const container = document.querySelector(cardsContainerSelector);
+//   const newCards = api.addCard(dataCard);
+//   newCards.then((data) => {
+//     console.log(data._id);
+//     return container.prepend(createCard(data));
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+//   addCardPopup.close();
 // }
-
-const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-18/cards",
-  headers: {
-    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
-    "Content-Type": "application/json"
-  }
-}); 
-
-const cards = api.getInitialCards();
-cards.then((data) => {
-  const cardSection = new Section({items: data, renderer: (item)=> {
-    cardSection.addItem(createCard(item));
-  }}, cardsContainerSelector);
-  cardSection.renderCards();
-});
+// });

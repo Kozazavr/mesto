@@ -1,30 +1,3 @@
-//  const initialCards = [
-//   {
-//     name: 'Архыз',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-//   },
-//   {
-//     name: 'Челябинская область',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-//   },
-//   {
-//     name: 'Иваново',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-//   },
-//   {
-//     name: 'Камчатка',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-//   },
-//   {
-//     name: 'Холмогорский район',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-//   },
-//   {
-//     name: 'Байкал',
-//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-//   }
-// ]; 
-
 const selectors = {
   formSelector: '.popup__container',  
   inputSelector: '.popup__input',    
@@ -49,9 +22,9 @@ const profileNameSelector = '.profile__name';
 const profileJobSelector = '.profile__job';
 const popupProfileSelector = '.popup_profile';
 const popupAddImagesSelector = '.popup_add-images';
+const profileAvatar = '.profile__avatar';
 
 export {
-  // initialCards, 
   selectors, 
   popupProfileForm, 
   popupAddImagesForm, 
@@ -67,5 +40,6 @@ export {
   profileNameSelector,
   profileJobSelector,
   popupProfileSelector,
-  popupAddImagesSelector
+  popupAddImagesSelector,
+  profileAvatar
 };

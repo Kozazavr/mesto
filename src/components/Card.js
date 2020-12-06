@@ -26,7 +26,7 @@ export default class Card {
     this._setEventListeners(); 
     return this._element; 
   } 
- 
+
   _setEventListeners() { 
     this._element.querySelector('.card__like').addEventListener('click', () => { 
       this._likeCardHeard(); 
@@ -37,7 +37,7 @@ export default class Card {
     }); 
  
     this._element.querySelector('.card__image').addEventListener('click', () => {     
-      this.handleCardClick();                                                         
+      this.handleCardClick();                     
     });                                                                               
   } 
  
@@ -49,4 +49,6 @@ export default class Card {
     this._element.remove(); 
     this._element = null;  
   } 
+
+
 } 
