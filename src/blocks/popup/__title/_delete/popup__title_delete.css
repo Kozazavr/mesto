@@ -1,0 +1,11 @@
+.popup__title_delete {
+  margin: 0;
+
+}
+
+@media screen and (max-width: 619px) {
+  .popup__title_delete {
+    margin: 0;
+  }
+} 
+

@@ -17,11 +17,16 @@
       <main class="page__content">
         <section class="profile page__profile">
           <div class="profile__container">
-            <img 
-              src="#" 
-              alt="#"
-              class="profile__avatar"
-            />
+            <div class="profile__container-avatar">
+              <img 
+                src="#" 
+                alt="#"
+                class="profile__avatar"
+              />
+              <div class="profile__avatar-cover">
+                <button class="profile__button-edit-avatar" type="button"></button>
+              </div>
+            </div>
             <div class="profile__info">
               <h1 class="profile__name"></h1>
               <button class="profile__button" type="button"></button>
@@ -69,12 +74,26 @@
         </section>
 
         <section class="popup popup_delete-images">
-          <div class="popup__container">
+          <form class="popup__container">
             <button type="button" class="popup__close popup__close_delete-images"></button>
-            <h2 class="popup__title">Вы уверены?</h2>
+            <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
             <button type="submit" class="popup__button popup__button_delete">Да</button>
-          </div>
+          </form>
         </section>
+
+        <section class="popup popup_avatar">
+          <form class="popup__container" name="avatar" id="avatarForm" novalidate>
+            <button type="button" class="popup__close popup__close_profile"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <div class="popup__field">
+              <input id="input-avatar" type="url" class="popup__input popup__input_type_avatar" minlength="2"
+                maxlength="40" name="popup_avatar" autocomplete="off" placeholder="Адрес" required>
+              <span id="input-avatar-error" class="popup__input-error"></span>
+            </div>
+            <button type="submit" class="popup__button popup__button_avatar">Сохранить</button>
+          </form>
+        </section>
+
 
         <section class="popup popup_view-images">
           <figure class="popup__picture-container">

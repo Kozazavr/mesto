@@ -28,11 +28,5 @@ export default class UserInfo {
 }
 
 
- 
-//     getUserInfo() {
-//       this._userInfo = { userName: this._userName.textContent, userJob: this._userJob.textContent, 
-//         userAvatar: this._profileAvatar.link};
-//       return this._userInfo;
-//     }
-  
+
 

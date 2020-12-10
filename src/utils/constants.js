@@ -23,6 +23,8 @@ const profileJobSelector = '.profile__job';
 const popupProfileSelector = '.popup_profile';
 const popupAddImagesSelector = '.popup_add-images';
 const profileAvatar = '.profile__avatar';
+const popupSubmitForm = '.popup_delete-images';
+const popupAvatar = '.popup_avatar';
 
 export {
   selectors, 
@@ -41,5 +43,7 @@ export {
   profileJobSelector,
   popupProfileSelector,
   popupAddImagesSelector,
-  profileAvatar
+  profileAvatar,
+  popupSubmitForm,
+  popupAvatar
 };
