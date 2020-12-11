@@ -8,6 +8,7 @@
   padding: 14.08px 125px;
   font-size: 18px;
   line-height: 22px;
+ position: relative;
 }
 
 .popup__button:hover {
@@ -24,3 +25,4 @@
     line-height: 17px;
   }
 }  
+

@@ -17,7 +17,11 @@ import {
   popupAddImagesSelector,
   profileAvatar,
   popupSubmitForm,
-  popupAvatar
+  popupAvatar,
+  profileButtonEditAvatar,
+  inputAvatar,
+  submitEditAvatar,
+  popupEditAvatar,
 } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
@@ -36,13 +40,19 @@ import './index.css';
 const viewPopupImage = new PopupWithImage(popupViewImagesSelector);
 const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector, avatarSelector: profileAvatar});
 const delPopup = new PopupWithSubmit(popupSubmitForm);
- 
-const popupSetAvatar = new PopupWithAvatar({selectorPopup: popupAvatar, submitForm: () => {PopupWithAvatar.close()}});///валидация!!!
 
-const buttonAvatar = document.querySelector('.profile__button-edit-avatar');
-buttonAvatar.addEventListener('click', () => {
-  popupSetAvatar.open();
-});
+function changeTextButton(popup) {
+  popup.querySelector('.popup__button').textContent = 'Сохранение...';
+}
+
+function defaultTextButton(popup) {
+  const popupSubmit = popup.querySelector('.popup__button');
+  if(popup === popupProfileForm || popup === popupEditAvatar) {
+      popupSubmit.textContent = 'Сохранить';
+    } else {
+      popupSubmit.textContent = 'Создать';
+    }
+}
 
 
  function createCard(item, count, ownerId) {
@@ -86,6 +96,9 @@ buttonAvatar.addEventListener('click', () => {
         card.querySelector('.card__counter').textContent = count;
         card.querySelector('.card__like').classList.remove('card__like_target');
         })
+        .catch((err) => {
+          console.log(err);
+        });
       }
     }
     }).generateCard();
@@ -110,7 +123,7 @@ api.getAllNeedData('users/me', 'cards')
   const ownerId = profilePromise._id;
   userInfo.setUserInfo(profilePromise);
   const cardSection = new Section({items: cardsPromise, renderer: (item)=> {
-    const count = item.likes.length; ////////////////////
+    const count = item.likes.length; 
     if(item.owner._id === ownerId) {
       cardSection.addItem(createCard(item, count, ownerId));
     } else {
@@ -124,16 +137,16 @@ api.getAllNeedData('users/me', 'cards')
 .catch((err) => {
   console.log(err);
 });
-///////
+
 
 const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
   const dataUser = {name: item.popup_name, about: item.popup_job};
   const profiNew = api.editProfile(dataUser, 'users/me');
-  profiNew.then((data) => {
-    userInfo.setUserInfoProfile(data);
+  profiNew.then((res) => {
+    userInfo.setUserInfoProfile(res);
     const profi = api.getProfileData('users/me');
-    profi.then((data) => {
-      userInfo.setUserInfoProfile(data);
+    profi.then((res) => {
+      userInfo.setUserInfoProfile(res);
     })
     .catch((err) => {
       console.log(err);
@@ -141,7 +154,8 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
   })
   .catch((err) => {
     console.log(err);
-  }) ;
+  });
+  changeTextButton(popupProfileForm);
   editUserPopup.close();
 }
 });
@@ -158,7 +172,27 @@ const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelect
   .catch((err) => {
     console.log(err);
   });
+  changeTextButton(popupAddImagesForm);
   addCardPopup.close();
+}
+});
+
+const popupSetAvatar = new PopupWithAvatar({selectorPopup: popupAvatar, submitForm: (item) => {
+  const newAvatar = api.editAvatar('users/me/avatar', item);
+  newAvatar.then((res) => {
+    const profi = api.getProfileData('users/me');
+    profi.then((res) => {
+     userInfo.setUserAvatarProfile(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  changeTextButton(popupEditAvatar);
+  popupSetAvatar.close();
 }
 });
   
@@ -167,10 +201,14 @@ const validatePopupProfile = new FormValidator(selectors, popupProfileForm);
 validatePopupProfile.enableValidation();
 const validatePopupAddImages = new FormValidator(selectors, popupAddImagesForm);
 validatePopupAddImages.enableValidation();
+const validatePopupEditAvatar = new FormValidator(selectors, popupEditAvatar);
+validatePopupEditAvatar.enableValidation();
+
 
 profileButtonAddImages.addEventListener('click', function () {
   validatePopupAddImages.inactiveButton(submitAddImages);
   validatePopupAddImages.hideInputError(popupAddImagesForm);
+  defaultTextButton(popupAddImagesForm);
   addCardPopup.open();
 });  
 
@@ -179,7 +217,15 @@ profileButton.addEventListener('click', function () {
   inputJob.value = userInfo.getUserInfo().userJob;  
   validatePopupProfile.activeButton(submitProfile); 
   validatePopupProfile.hideInputError(popupProfileForm);
+  defaultTextButton(popupProfileForm);
   editUserPopup.open();
+}); 
+
+profileButtonEditAvatar.addEventListener('click', function () {  
+  validatePopupEditAvatar.inactiveButton(submitEditAvatar);
+  validatePopupEditAvatar.hideInputError(popupEditAvatar, inputAvatar);
+  defaultTextButton(popupEditAvatar);
+  popupSetAvatar.open();
 }); 
 
 editUserPopup.setEventListener();
@@ -187,50 +233,6 @@ addCardPopup.setEventListener();
 viewPopupImage.setEventListener(); 
 delPopup.setEventListener();
 popupSetAvatar.setEventListener();
- 
-
-// const profi = api.getProfileData('users/me');
-// profi.then((data) => {
-//   const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector, avatarSelector: profileAvatar});
-//   userInfo.setUserInfo(data);
-// })
-// .catch((err) => {
-//   console.log(err);
-// });
-
-// const profiNew = api3.editProfile({name: "ssss", about: "Korben"});
-// profiNew.then((data) => {
-//  console.log(data);
-//  userInfo.setUserInfoProfile(data);
-// })
-// .catch((err) => {
-//   console.log(err);
-// });
 
 
-// const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
-//   const dataUser = {name: item.popup_name, about: item.popup_job};
-//   console.log(dataUser);
-//   userInfo.setUserInfo(item);
-//   editUserPopup.close();
-// } 
-// });
-
-
-// const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
-//   const dataCard = {name: item.popup_name, link: item.popup_job, id: item.id};
-//   const container = document.querySelector(cardsContainerSelector);
-//   const newCards = api.addCard(dataCard);
-//   newCards.then((data) => {
-//     console.log(data._id);
-//     return container.prepend(createCard(data));
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-//   addCardPopup.close();
-// }
-// });
-
-
-
+  

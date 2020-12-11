@@ -1,29 +1,22 @@
 import Popup from './Popup.js';
-import PopupWithForm from './PopupWithForm.js';
           
-export default class PopupWithAvatar extends PopupWithForm {
+export default class PopupWithAvatar extends Popup {
   constructor({selectorPopup, submitForm}) {
-    super({selectorPopup, submitForm});  
-    // this._submitForm = submitForm; 
-    // this._container = this._openPopup.querySelector('.popup__container');
+    super(selectorPopup);  
+    this._submitForm = submitForm;
+    this._container = this._openPopup.querySelector('.popup__container');
   }
 
-  _getInputValues() {
+  _getInputValue() {
     this._input = this._container.querySelector('.popup__input'); 
-    // this._formValues = {}; 
-    // this._inputList.forEach(input => {  // добавляем в этот объект значения всех полей
-    //   this._formValues[input.name] = input.value;
-    // });
-    this._input.name = input.value;
-    return this._formValues;
-    
+    return this._input.value;
   }
 
   setEventListener() {
     super.setEventListener();
     this._openPopup.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submitForm(this._getInputValues());
+      this._submitForm(this._getInputValue());
     });
   }
 

@@ -97,6 +97,15 @@ export default class Api {
     }); 
   }
 
+  editAvatar(url, avatar) {  
+    return fetch(`${this._url}${url}`,  {
+      method: "PATCH", 
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      })
+    })
+  }
 
 }
 
