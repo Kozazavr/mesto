@@ -3,7 +3,6 @@ import Popup from './Popup.js';
 export default class PopupWithSubmit extends Popup {
   constructor(selectorPopup) {
     super(selectorPopup);
-    
   }
 
   setSubmitAction(submitAction) {
@@ -17,9 +16,4 @@ export default class PopupWithSubmit extends Popup {
       this._handleSubmitCallback();
     });
   }
-
 }
-
-
-
-

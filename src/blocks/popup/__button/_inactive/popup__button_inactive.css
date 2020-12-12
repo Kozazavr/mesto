@@ -3,14 +3,3 @@
   outline: 1px solid;
   color: rgba(0, 0, 0, 0.2);
 }
-
-
-@media screen and (max-width: 619px) {
-  .popup__button {
-    padding: 14.5px 82px;
-    margin: 45px 0 0;
-    font-size: 14px;
-    line-height: 17px;
-  }
-} 
-

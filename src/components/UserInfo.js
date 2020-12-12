@@ -9,7 +9,7 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    this._userInfo = { userName: this._userName.textContent, userJob: this._userJob.textContent};
+    this._userInfo = {userName: this._userName.textContent, userJob: this._userJob.textContent};
     return this._userInfo;
   }
 

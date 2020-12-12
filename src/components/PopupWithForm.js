@@ -14,7 +14,6 @@ export default class PopupWithForm extends Popup {
       this._formValues[input.name] = input.value;
     });
     return this._formValues;
-    
   }
 
   setEventListener() {
@@ -30,10 +29,3 @@ export default class PopupWithForm extends Popup {
     this._container.reset();
   }
 }
-
-
-
- 
-  
-
-

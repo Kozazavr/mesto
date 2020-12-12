@@ -26,10 +26,13 @@ const profileNameSelector = '.profile__name';
 const profileJobSelector = '.profile__job';
 const popupProfileSelector = '.popup_profile';
 const popupAddImagesSelector = '.popup_add-images';
-const profileAvatar = '.profile__avatar';
-const popupSubmitForm = '.popup_delete-images';
-const popupAvatar = '.popup_avatar';
-
+const profileAvatarSelector = '.profile__avatar';
+const popupSubmitFormSelector = '.popup_delete-images';
+const popupAvatarSelector = '.popup_avatar';
+const popupSubmitButtonSelector = '.popup__button';
+const cardCounterSelector = '.card__counter';
+const cardLikeSelector = '.card__like';
+const cardLikeTargetSelector = 'card__like_target';
 
 export {
   selectors, 
@@ -48,14 +51,15 @@ export {
   profileJobSelector,
   popupProfileSelector,
   popupAddImagesSelector,
-  profileAvatar,
-  popupSubmitForm,
-  popupAvatar,
+  profileAvatarSelector,
+  popupSubmitFormSelector,
+  popupAvatarSelector,
   profileButtonEditAvatar,
   inputAvatar,
   submitEditAvatar,
   popupEditAvatar,
-  // popupSubmit,
-  // valueProfileSubmit,
-  // valueAddImageSubmit
+  popupSubmitButtonSelector,
+  cardCounterSelector,
+  cardLikeSelector,
+  cardLikeTargetSelector,
 };

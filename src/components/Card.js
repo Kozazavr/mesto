@@ -1,14 +1,13 @@
 export default class Card { 
   
-  constructor(data, theBestWebProggerInMyRoomId, cardSelector, {handleCardClick, handleDeleteIconClick, likeCardHeard}) { 
-    this.checked = false;
-    this.Proverka = false;
+  constructor(data, ownerId, cardSelector, {handleCardClick, handleDeleteIconClick, likeCardHeard}) { 
+    this.isChecked = false;
+    this.checkId = false;
     this._name = data.name; 
     this._image = data.link; 
-    this._ownerId = data.owner._id;
-    this.theBestWebProggerInMyRoomId = theBestWebProggerInMyRoomId;
+    this.likes = data.likes;
     this._alt = data.name; 
-    this._data = data;
+    this.ownerId = ownerId;
     this._cardSelector = cardSelector; 
     this.handleCardClick = handleCardClick; 
     this.handleDeleteIconClick = handleDeleteIconClick;
@@ -32,14 +31,13 @@ export default class Card {
     cardImage.alt = this._alt; 
     cardTitle.textContent = this._name; 
     this._setEventListeners(); 
-    this._targetLike(this._setLikeChecked(this.theBestWebProggerInMyRoomId));
+    this._targetLike(this._setLikeChecked());
     return this._element; 
   } 
 
   _setEventListeners() { 
     this._element.querySelector('.card__like').addEventListener('click', () => { 
       this.likeCardHeard(this._isLike()); 
-         
     }); 
  
     this._element.querySelector('.card__recycle-bin').addEventListener('click', () => { 
@@ -52,29 +50,23 @@ export default class Card {
   } 
 
   _isLike() {
-    if(!this.checked) {
-      this.checked = true;
-      return this._setLikeChecked(this.theBestWebProggerInMyRoomId);
+    if(!this.isChecked) {
+      this.isChecked = true;
+      return this._setLikeChecked();
     } else {
-      this.Proverka = !this.Proverka;
-      return this.Proverka;
+      this.checkId = !this.checkId;
+      return this.checkId;
     }
   }
 
-  _setLikeChecked(iddd) {
-    let array = this._data.likes;
-    this.Proverka = array.some(item => {return item._id === iddd}); 
-    return this.Proverka;
+  _setLikeChecked() {
+    this.checkId = this.likes.some(item => {return item._id === this.ownerId}); 
+    return this.checkId;
   }
 
-  _targetLike(checked) {
-    if(checked) {
+  _targetLike(check) {
+    if(check) {
       this._element.querySelector('.card__like').classList.add('card__like_target');
     };
   }
-
 } 
-
-
-
-

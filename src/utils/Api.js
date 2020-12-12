@@ -54,7 +54,6 @@ export default class Api {
         name: data.name,
         about: data.about
       })
- 
     })
   }
 
