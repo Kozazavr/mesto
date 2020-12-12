@@ -1,10 +1,17 @@
 export default class Card { 
-  constructor(data, cardSelector, handleCardClick) { 
+  
+  constructor(data, ownerId, cardSelector, {handleCardClick, handleDeleteIconClick, likeCardHeard}) { 
+    this.isChecked = false;
+    this.checkId = false;
     this._name = data.name; 
     this._image = data.link; 
+    this.likes = data.likes;
     this._alt = data.name; 
+    this.ownerId = ownerId;
     this._cardSelector = cardSelector; 
     this.handleCardClick = handleCardClick; 
+    this.handleDeleteIconClick = handleDeleteIconClick;
+    this.likeCardHeard = likeCardHeard;
   } 
  
   _getTemplate() { 
@@ -24,29 +31,42 @@ export default class Card {
     cardImage.alt = this._alt; 
     cardTitle.textContent = this._name; 
     this._setEventListeners(); 
+    this._targetLike(this._setLikeChecked());
     return this._element; 
   } 
- 
+
   _setEventListeners() { 
     this._element.querySelector('.card__like').addEventListener('click', () => { 
-      this._likeCardHeard(); 
+      this.likeCardHeard(this._isLike()); 
     }); 
  
     this._element.querySelector('.card__recycle-bin').addEventListener('click', () => { 
-      this._deleteCard(); 
+       this.handleDeleteIconClick();
     }); 
  
     this._element.querySelector('.card__image').addEventListener('click', () => {     
-      this.handleCardClick();                                                         
+      this.handleCardClick();                     
     });                                                                               
   } 
- 
-  _likeCardHeard() { 
-    this._element.querySelector('.card__like').classList.toggle('card__like_target'); 
-  } 
- 
-  _deleteCard() { 
-    this._element.remove(); 
-    this._element = null;  
-  } 
+
+  _isLike() {
+    if(!this.isChecked) {
+      this.isChecked = true;
+      return this._setLikeChecked();
+    } else {
+      this.checkId = !this.checkId;
+      return this.checkId;
+    }
+  }
+
+  _setLikeChecked() {
+    this.checkId = this.likes.some(item => {return item._id === this.ownerId}); 
+    return this.checkId;
+  }
+
+  _targetLike(check) {
+    if(check) {
+      this._element.querySelector('.card__like').classList.add('card__like_target');
+    };
+  }
 } 
