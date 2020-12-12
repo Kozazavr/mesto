@@ -70,11 +70,11 @@ function createCard(item, count, ownerId) {
         api.deleteCard(`cards/${item._id}`) 
         .then(() => {
           card.remove();
+          deletePopupImage.close();
         })
         .catch((err) => {
           console.log(err);
         });
-        deletePopupImage.close();
       });
     },
     likeCardHeard: (check) => {
@@ -142,6 +142,8 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
     const profi = api.getProfileData('users/me');
     profi.then((res) => {
       userInfo.setUserInfoProfile(res);
+      changeTextButton(popupProfileForm);
+      editUserPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -150,8 +152,6 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
   .catch((err) => {
     console.log(err);
   });
-  changeTextButton(popupProfileForm);
-  editUserPopup.close();
 }});
 
 const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
