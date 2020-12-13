@@ -1,6 +1,6 @@
 export default class Card { 
   
-  constructor(data, ownerId, cardSelector, {handleCardClick, handleDeleteIconClick, likeCardHeard}) { 
+  constructor(data, ownerId, cardSelector, userId, {handleCardClick, handleDeleteIconClick, likeCardHeard}) { 
     this.isChecked = false;
     this.checkId = false;
     this._name = data.name; 
@@ -8,6 +8,7 @@ export default class Card {
     this.likes = data.likes;
     this._alt = data.name; 
     this.ownerId = ownerId;
+    this.userId = userId; 
     this._cardSelector = cardSelector; 
     this.handleCardClick = handleCardClick; 
     this.handleDeleteIconClick = handleDeleteIconClick;
@@ -32,6 +33,9 @@ export default class Card {
     cardTitle.textContent = this._name; 
     this._setEventListeners(); 
     this._targetLike(this._setLikeChecked());
+    if(this.userId != this.ownerId) {                                
+      this._element.querySelector('.card__recycle-bin').classList.add('card__recycle-bin-hide');
+    }
     return this._element; 
   } 
 
@@ -70,3 +74,4 @@ export default class Card {
     };
   }
 } 
+

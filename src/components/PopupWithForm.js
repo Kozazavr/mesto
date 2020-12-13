@@ -10,10 +10,15 @@ export default class PopupWithForm extends Popup {
   _getInputValues() {
     this._inputList = this._container.querySelectorAll('.popup__input'); 
     this._formValues = {}; 
-    this._inputList.forEach(input => {  // добавляем в этот объект значения всех полей
+    if(this._inputList.length === 1) {
+      this._input = this._container.querySelector('.popup__input'); 
+      return this._input.value;
+    } else {
+      this._inputList.forEach(input => {  // добавляем в этот объект значения всех полей
       this._formValues[input.name] = input.value;
     });
     return this._formValues;
+    }
   }
 
   setEventListener() {
