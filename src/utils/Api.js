@@ -4,8 +4,8 @@ export default class Api {
     this._headers = options.headers;
   }
 
-  getCards(cards) {
-    return fetch(`${this._url}${cards}`, {
+  getCards() {
+    return fetch(`${this._url}cards`, {
       headers: this._headers
     })
     .then((res) => {
@@ -16,8 +16,8 @@ export default class Api {
     }); 
   }
 
-  getProfileData(me) {
-    return fetch(`${this._url}${me}`, {
+  getProfileData() {
+    return fetch(`${this._url}users/me`, {
       headers: this._headers
     })
     .then((res) => {
@@ -28,12 +28,12 @@ export default class Api {
     }); 
   }
   
-  getAllNeedData(me, cards) {
-    return Promise.all([this.getProfileData(me), this.getCards(cards)]);
+  getInitialData() {
+    return Promise.all([this.getProfileData(), this.getCards()]);
   }
 
-  addCard(data, cards) {
-    return fetch(`${this._url}${cards}`, {
+  addCard(data) {
+    return fetch(`${this._url}cards`, {
       method: "POST", 
       headers: this._headers,
       body: JSON.stringify(data),
@@ -46,8 +46,8 @@ export default class Api {
     })
   }
 
-  editProfile(data, me) {
-    return fetch(`${this._url}${me}`, {
+  editProfile(data) {
+    return fetch(`${this._url}users/me`, {
       method: "PATCH", 
       headers: this._headers,
       body: JSON.stringify({
@@ -58,7 +58,7 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._url}${cardId}`, {
+    return fetch(`${this._url}cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     })
@@ -71,7 +71,7 @@ export default class Api {
   }
 
   setLike(cardId) {
-    return fetch(`${this._url}${cardId}`, {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
       method: "PUT",
       headers: this._headers,
     })
@@ -84,7 +84,7 @@ export default class Api {
   }
 
   unLike(cardId) {
-    return fetch(`${this._url}${cardId}`, {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     })
@@ -96,8 +96,8 @@ export default class Api {
     }); 
   }
 
-  editAvatar(url, avatar) {  
-    return fetch(`${this._url}${url}`,  {
+  editAvatar(avatar) {  
+    return fetch(`${this._url}users/me/avatar`,  {
       method: "PATCH", 
       headers: this._headers,
       body: JSON.stringify({
@@ -107,8 +107,3 @@ export default class Api {
   }
 
 }
-
-
-
-
-

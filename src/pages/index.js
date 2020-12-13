@@ -55,18 +55,27 @@ const viewPopupImage = new PopupWithImage(popupViewImagesSelector);
 const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector, avatarSelector: profileAvatarSelector});
 const deletePopupImage = new PopupWithSubmit(popupSubmitFormSelector);  
 
-function createCard(item, count, ownerId) {
+const api = new Api({  
+  url: "https://mesto.nomoreparties.co/v1/cohort-18/",
+  headers: {
+    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
+    "content-type": "application/json"
+  }
+}); 
+
+function createCard(item, count, ownerId, userId) {
   const card = new Card(
     item,
     ownerId,
     cardId, 
+    userId,
     {handleCardClick: () => {  
       viewPopupImage.open({name: item.name, link: item.link});
     },
     handleDeleteIconClick: () => {
       deletePopupImage.open();
       deletePopupImage.setSubmitAction(() => {
-        api.deleteCard(`cards/${item._id}`) 
+        api.deleteCard(item._id) 
         .then(() => {
           card.remove();
           deletePopupImage.close();
@@ -78,7 +87,7 @@ function createCard(item, count, ownerId) {
     },
     likeCardHeard: (check) => {
       if(!check) {
-        api.setLike(`cards/likes/${item._id}`)
+        api.setLike(item._id)
         .then((res) => {
           const count = res.likes.length;
           card.querySelector(cardCounterSelector).textContent = count;
@@ -88,7 +97,7 @@ function createCard(item, count, ownerId) {
           console.log(err);
         });
       } else {
-       api.unLike(`cards/likes/${item._id}`)
+       api.unLike(item._id)
         .then((res) => {
           const count = res.likes.length;
           card.querySelector(cardCounterSelector).textContent = count;
@@ -104,28 +113,15 @@ function createCard(item, count, ownerId) {
   return card;
 }
 
-const api = new Api({  
-  url: "https://mesto.nomoreparties.co/v1/cohort-18/",
-  headers: {
-    "authorization": "314f493f-d410-4af8-924a-085e955b4269",
-    "content-type": "application/json"
-  }
-}); 
-
-api.getAllNeedData('users/me', 'cards')
+api.getInitialData()
 .then(arrayPromise => {
   const [profilePromise, cardsPromise] = arrayPromise;
   const ownerId = profilePromise._id;
   userInfo.setUserInfo(profilePromise);
   const cardSection = new Section({items: cardsPromise, renderer: (item)=> {
+    let userId = item.owner._id;
     const count = item.likes.length; 
-    if(item.owner._id === ownerId) {
-      cardSection.addItem(createCard(item, count, ownerId));
-    } else {
-      let cardWithoutBin = createCard(item, count, ownerId);
-      cardWithoutBin.querySelector('.card__recycle-bin').classList.add('card__recycle-bin-hide');
-      cardSection.addItem(cardWithoutBin);
-    }
+    cardSection.addItem(createCard(item, count, ownerId, userId));
   }}, cardsContainerSelector);
   cardSection.renderCards();
 })
@@ -134,15 +130,14 @@ api.getAllNeedData('users/me', 'cards')
 });
 
 const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
-  console.log(item);
+  changeTextButton(popupProfileForm);
   const dataUser = {name: item.popup_name, about: item.popup_job};
-  const profileNew = api.editProfile(dataUser, 'users/me');
+  const profileNew = api.editProfile(dataUser);
   profileNew.then((res) => {
     userInfo.setUserInfoProfile(res);
-    const profi = api.getProfileData('users/me');
+    const profi = api.getProfileData();
     profi.then((res) => {
       userInfo.setUserInfoProfile(res);
-      changeTextButton(popupProfileForm);
       editUserPopup.close();
     })
     .catch((err) => {
@@ -154,16 +149,13 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
   });
 }});
 
-
-
 const popupSetAvatar = new PopupWithForm({selectorPopup: popupAvatarSelector, submitForm: (item) => {
-  console.log(item);
-  const newAvatar = api.editAvatar('users/me/avatar', item);
+  changeTextButton(popupEditAvatar);
+  const newAvatar = api.editAvatar(item);
   newAvatar.then(() => {
-    const profileData = api.getProfileData('users/me');
+    const profileData = api.getProfileData();
     profileData.then((res) => {
       userInfo.setUserAvatarProfile(res);
-      changeTextButton(popupEditAvatar);
       popupSetAvatar.close();
     })
     .catch((err) => {
@@ -176,19 +168,20 @@ const popupSetAvatar = new PopupWithForm({selectorPopup: popupAvatarSelector, su
 }});
 
 const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
+  changeTextButton(popupAddImagesForm);
   const dataCard = {name: item.popup_name, link: item.popup_job, id: item.id};
-  const cardContainer = document.querySelector(cardsContainerSelector);
-  const newCards = api.addCard(dataCard, 'cards');
+  const newCards = api.addCard(dataCard);
   newCards.then((data) => {
-    changeTextButton(popupAddImagesForm);
+    const cardSection = new Section({items: data, renderer: (item)=> {
+      cardSection.addItem(createCard(item, 0, data.owner._id, data.owner._id));
+    }}, cardsContainerSelector);
+    cardSection.renderCard();
     addCardPopup.close();
-    return cardContainer.prepend(createCard(data, 0, data.owner._id));
   })
   .catch((err) => {
     console.log(err);
   });
 }});
-
 
 const validatePopupProfile = new FormValidator(selectors, popupProfileForm);
 validatePopupProfile.enableValidation();
@@ -205,8 +198,9 @@ profileButtonAddImages.addEventListener('click', function () {
 });  
 
 profileButton.addEventListener('click', function () {  
-  inputName.value = userInfo.getUserInfo().userName;    
-  inputJob.value = userInfo.getUserInfo().userJob;  
+  let userData = userInfo.getUserInfo();
+  inputName.value = userData.userName; 
+  inputJob.value = userData.userJob; 
   validatePopupProfile.activeButton(submitProfile); 
   validatePopupProfile.hideInputError(popupProfileForm);
   defaultTextButton(popupProfileForm);
@@ -225,3 +219,4 @@ addCardPopup.setEventListener();
 viewPopupImage.setEventListener(); 
 deletePopupImage.setEventListener();
 popupSetAvatar.setEventListener();
+

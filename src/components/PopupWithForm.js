@@ -34,10 +34,3 @@ export default class PopupWithForm extends Popup {
     this._container.reset();
   }
 }
-
-  // _getInputValue() {
-  //   this._input = this._container.querySelector('.popup__input'); 
-  //   return this._input.value;
-  // }
-
-
