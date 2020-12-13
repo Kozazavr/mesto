@@ -36,7 +36,6 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
-import PopupWithAvatar from '../components/PopupWithAvatar.js';
 import './index.css'; 
 
 function changeTextButton(popup) {
@@ -70,11 +69,11 @@ function createCard(item, count, ownerId) {
         api.deleteCard(`cards/${item._id}`) 
         .then(() => {
           card.remove();
+          deletePopupImage.close();
         })
         .catch((err) => {
           console.log(err);
         });
-        deletePopupImage.close();
       });
     },
     likeCardHeard: (check) => {
@@ -135,6 +134,7 @@ api.getAllNeedData('users/me', 'cards')
 });
 
 const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, submitForm: (item) => {  
+  console.log(item);
   const dataUser = {name: item.popup_name, about: item.popup_job};
   const profileNew = api.editProfile(dataUser, 'users/me');
   profileNew.then((res) => {
@@ -142,6 +142,8 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
     const profi = api.getProfileData('users/me');
     profi.then((res) => {
       userInfo.setUserInfoProfile(res);
+      changeTextButton(popupProfileForm);
+      editUserPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -150,8 +152,27 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
   .catch((err) => {
     console.log(err);
   });
-  changeTextButton(popupProfileForm);
-  editUserPopup.close();
+}});
+
+
+
+const popupSetAvatar = new PopupWithForm({selectorPopup: popupAvatarSelector, submitForm: (item) => {
+  console.log(item);
+  const newAvatar = api.editAvatar('users/me/avatar', item);
+  newAvatar.then(() => {
+    const profileData = api.getProfileData('users/me');
+    profileData.then((res) => {
+      userInfo.setUserAvatarProfile(res);
+      changeTextButton(popupEditAvatar);
+      popupSetAvatar.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }});
 
 const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
@@ -159,34 +180,16 @@ const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelect
   const cardContainer = document.querySelector(cardsContainerSelector);
   const newCards = api.addCard(dataCard, 'cards');
   newCards.then((data) => {
+    changeTextButton(popupAddImagesForm);
+    addCardPopup.close();
     return cardContainer.prepend(createCard(data, 0, data.owner._id));
   })
   .catch((err) => {
     console.log(err);
   });
-  changeTextButton(popupAddImagesForm);
-  addCardPopup.close();
 }});
 
-const popupSetAvatar = new PopupWithAvatar({selectorPopup: popupAvatarSelector, submitForm: (item) => {
-  const newAvatar = api.editAvatar('users/me/avatar', item);
-  newAvatar.then(() => {
-    const profileData = api.getProfileData('users/me');
-    profileData.then((res) => {
-      userInfo.setUserAvatarProfile(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-  changeTextButton(popupEditAvatar);
-  popupSetAvatar.close();
-}
-});
-  
+
 const validatePopupProfile = new FormValidator(selectors, popupProfileForm);
 validatePopupProfile.enableValidation();
 const validatePopupAddImages = new FormValidator(selectors, popupAddImagesForm);
