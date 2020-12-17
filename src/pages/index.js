@@ -138,10 +138,6 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
     const profi = api.getProfileData();
     profi.then((res) => {
       userInfo.setUserInfoProfile(res);
-<<<<<<< HEAD
-      changeTextButton(popupProfileForm);
-=======
->>>>>>> nine-work
       editUserPopup.close();
     })
     .catch((err) => {
@@ -151,23 +147,6 @@ const editUserPopup = new PopupWithForm({selectorPopup: popupProfileSelector, su
   .catch((err) => {
     console.log(err);
   });
-<<<<<<< HEAD
-}});
-
-const addCardPopup = new PopupWithForm({selectorPopup: popupAddImagesSelector, submitForm: (item) => {  
-  const dataCard = {name: item.popup_name, link: item.popup_job, id: item.id};
-  const cardContainer = document.querySelector(cardsContainerSelector);
-  const newCards = api.addCard(dataCard, 'cards');
-  newCards.then((data) => {
-    return cardContainer.prepend(createCard(data, 0, data.owner._id));
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-  changeTextButton(popupAddImagesForm);
-  addCardPopup.close();
-=======
->>>>>>> nine-work
 }});
 
 const popupSetAvatar = new PopupWithForm({selectorPopup: popupAvatarSelector, submitForm: (item) => {
