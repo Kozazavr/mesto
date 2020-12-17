@@ -13,5 +13,5 @@
 
 Добавлены обращения к API сервера, улучшен UX-форм.
 
-Адрес проекта: https://kozazavr.github.io/mesto/
+Адрес проекта: https://kozazavr.github.io/gh-pages/
 
